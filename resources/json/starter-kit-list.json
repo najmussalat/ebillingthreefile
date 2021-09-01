@@ -1,0 +1,17 @@
+{
+  "listItems": [
+   
+     {
+      "url": "superadmin/diseaselist",
+      "name": "Disease List",
+      "i18n": "Disease List",
+      "slug": "superadmin-diseaselist"
+    },
+    {
+      "url": "superadmin/diseaselist/create",
+      "name": "Create Disease",
+      "i18n": "Create Disease",
+      "slug": "superadmin-diseaselist-create"
+    }
+  ]
+}

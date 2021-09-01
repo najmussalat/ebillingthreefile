@@ -1,0 +1,265 @@
+{
+    "menu": [{
+            "url": "javascript:void(0)",
+            "name": "Admin",
+            "i18n": "Admin",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "admin",
+            "icon": "dashboard",
+
+
+            "submenu": [
+
+                {
+                    "url": "superadmin/permissionlist",
+                    "name": "Permission List",
+                    "i18n": "Permission  List",
+                    "slug": "superadmin-permissionlist"
+                },
+                {
+                    "url": "superadmin/accountrolelist",
+                    "name": "Role List",
+                    "i18n": "Role List",
+                    "slug": "superadmin-accountrolelist"
+                },
+                {
+                    "url": "superadmin/adminlist",
+                    "name": "Admin List",
+                    "i18n": "Admin List",
+                    "slug": "superadmin-adminlist"
+                },
+                {
+                    "url": "superadmin/createadmin",
+                    "name": "Create Admin",
+                    "i18n": "Create Admin",
+                    "slug": "createadmin"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Disease",
+            "i18n": "Disease",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "disease",
+            "icon": "dashboard",
+
+
+            "submenu": [{
+                    "url": "superadmin/diseaselist",
+                    "name": "Disease List",
+                    "i18n": "Disease List",
+                    "slug": "superadmin-diseaselist"
+                },
+                {
+                    "url": "superadmin/createdisease",
+                    "name": "Create Disease",
+                    "i18n": "Create Disease",
+                    "slug": "createdisease"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Medicines",
+            "i18n": "Medicines",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "medicines",
+            "icon": "pages",
+            "submenu": [{
+                    "url": "superadmin/medicinelist",
+                    "name": "Medicines List",
+                    "i18n": "Medicines List",
+                    "slug": "superadmin/medicinelist"
+                },
+                {
+                    "url": "superadmin/createmedicinelist",
+                    "name": "Create Medicine",
+                    "i18n": "Create Medicine",
+                    "slug": "superadmin/createmedicinelist"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "DiseaseMedicines",
+            "i18n": "DiseaseMedicines",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "diseasemedicines",
+            "icon": "pages",
+            "submenu": [{
+                    "url": "superadmin/disemedicinelist",
+                    "name": "DiseaseMedicines List",
+                    "i18n": "DiseaseMedicines List",
+                    "slug": "superadmin/disemedicinelist"
+                },
+                {
+                    "url": "superadmin/createdisemedicinelist",
+                    "name": "Create DiseaseMedicines",
+                    "i18n": "Create DiseaseMedicines",
+                    "slug": "superadmin/createdisemedicinelist"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Medicineinfo",
+            "i18n": "Medicineinfo",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "medicineinformation",
+            "icon": "pages",
+            "submenu": [{
+                    "url": "superadmin/medicineinformationlist",
+                    "name": "Medicineinfo List",
+                    "i18n": "Medicineinfo List",
+                    "slug": "superadmin/medicineinformationlist"
+                },
+                {
+                    "url": "superadmin/createdisemedicinelist",
+                    "name": "Create Medicineinfo",
+                    "i18n": "Create Medicineinfo",
+                    "slug": "superadmin/createedicineinformation"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Blog",
+            "i18n": "Blog",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "blog",
+            "icon": "pages",
+            "submenu": [{
+                    "url": "superadmin/bloglist",
+                    "name": "Blog List",
+                    "i18n": "Blog List",
+                    "slug": "superadmin/bloglist"
+                },
+                {
+                    "url": "superadmin/createblog",
+                    "name": "Create Blog",
+                    "i18n": "Create Blog",
+                    "slug": "superadmin/createblog"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Contact",
+            "i18n": "Contact",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "contact",
+            "icon": "pages",
+            "submenu": [{
+                    "url": "superadmin/emaillist",
+                    "name": "Email List",
+                    "i18n": "Email List",
+                    "slug": "superadmin/emaillist"
+                },
+                {
+                    "url": "superadmin/createemail",
+                    "name": "Create Email",
+                    "i18n": "Create Email",
+                    "slug": "superadmin/createemail"
+                }
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Setting",
+            "i18n": "Setting",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "setting",
+            "icon": "settings_applications",
+            "submenu": [{
+                    "url": "superadmin/commandlist",
+                    "name": "Command List",
+                    "i18n": "Command List",
+                    "slug": "superadmin/commandlist"
+                },
+                {
+                    "url": "filemanager",
+                    "name": "File Manager",
+                    "i18n": "File Manager",
+                    "slug": "filemanager"
+                },
+                {
+                    "url": "sitemonitor",
+                    "name": "Site Monitor",
+                    "i18n": "Site Monitor",
+                    "slug": "sitemonitor"
+                }
+
+            ]
+        },
+
+        {
+            "url": "javascript:void(0)",
+            "name": "Location",
+            "i18n": "Location",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "Location",
+            "icon": "add_location",
+            "submenu": [{
+                    "url": "superadmin/countrylist",
+                    "name": "Country List",
+                    "i18n": "Country List",
+                    "slug": "superadmin/countrylist"
+                },
+                {
+                    "url": "superadmin/createcountry",
+                    "name": "Create Country",
+                    "i18n": "Create Country",
+                    "slug": "superadmin/createcountry"
+                },
+                {
+                    "url": "superadmin/divisionlist",
+                    "name": "Division List",
+                    "i18n": "Division List",
+                    "slug": "superadmin/divisionlist"
+                },
+                {
+                    "url": "superadmin/createdivision",
+                    "name": "Create Division",
+                    "i18n": "Create Division",
+                    "slug": "superadmin/createdivision"
+                },
+
+                {
+                    "url": "superadmin/districtlist",
+                    "name": "District List",
+                    "i18n": "District List",
+                    "slug": "superadmin/districtlist"
+                },
+                {
+                    "url": "superadmin/createdistrict",
+                    "name": "Create District",
+                    "i18n": "Create District",
+                    "slug": "superadmin/createdistrict"
+                },
+                {
+                    "url": "superadmin/thanalist",
+                    "name": "Thana List",
+                    "i18n": "Thana List",
+                    "slug": "superadmin/thanalist"
+                },
+                {
+                    "url": "superadmin/createthana",
+                    "name": "Create Thana",
+                    "i18n": "Create Thana",
+                    "slug": "superadmin/createthana"
+                }
+
+            ]
+        }
+
+
+    ]
+}

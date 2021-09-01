@@ -1,0 +1,170 @@
+{
+    "menu": [{
+            "url": "javascript:void(0)",
+            "name": "Customer",
+            "i18n": "Customer",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "customer",
+            "icon": "dashboard",
+
+            "submenu": [{
+                    "url": "admin/customerlist",
+                    "name": "Customer List",
+                    "i18n": "Customer List",
+                    "slug": "admin/customerlist"
+                },
+                {
+                    "url": "admin/pendingcustomerlist",
+                    "name": "Pending Customer List",
+                    "i18n": "Pending Customer List",
+                    "slug": "admin/pendingcustomerlist"
+                },
+                {
+                    "url": "admin/createcustomer",
+                    "name": "Create Customer",
+                    "i18n": "Create Customser",
+                    "slug": "admin/createcustomer"
+                },
+                {
+                    "url": "admin/inactivecustomer",
+                    "name": "Inactive Customer",
+                    "i18n": "Inactive Customser",
+                    "slug": "admin/inactivecustomer"
+                }
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Collection",
+            "i18n": "Collection",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "collection",
+            "icon": "filter_vintage",
+
+            "submenu": [{
+                    "url": "admin/collection",
+                    "name": "Collection Search",
+                    "i18n": "Collection Search",
+                    "slug": "admin-collection"
+                },
+                {
+                    "url": "admin/createcollection",
+                    "name": "Create Collection",
+                    "i18n": "Create Collection",
+                    "slug": "createcollection"
+                },
+                {
+                    "url": "admin/cancelcollection",
+                    "name": "Cancel Collection",
+                    "i18n": "Cancel Collection",
+                    "slug": "cancelcollection"
+                }
+
+
+            ]
+
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Print",
+            "i18n": "Print",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "print",
+            "icon": "print",
+            "submenu": [{
+                "url": "admin/monthlyprint",
+                "name": "Monthly Print",
+                "i18n": "Monthly Print",
+                "slug": "admin/monthlyprint"
+                },
+                {
+                    "url": "admin/printlocationwise",
+                    "name": "Print Locationwise",
+                    "i18n": "Print Locationwise",
+                    "slug": "admin/printlocationwise"
+                }
+
+            ]
+        },
+       
+        {
+            "url": "javascript:void(0)",
+            "name": "Setting",
+            "i18n": "Setting",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "setting",
+            "icon": "settings_applications",
+            "submenu": [{
+                    "url": "admin/arealist",
+                    "name": "Area List",
+                    "i18n": "Area List",
+                    "slug": "admin/arealist"
+                },
+                {
+                    "url": "admin/createarea",
+                    "name": "Create Area",
+                    "i18n": "Create Area",
+                    "slug": "admin/createarea"
+                },
+                {
+                    "url": "admin/createmerchant",
+                    "name": "Create Merchant",
+                    "i18n": "Create Merchant",
+                    "slug": "admin/createmerchant"
+
+                },
+                {
+                    "url": "admin/merchantlist",
+                    "name": "Merchant List",
+                    "i18n": "Merchant List",
+                    "slug": "admin/merchantlist"
+                },
+
+
+                {
+                    "url": "admin/createpackage",
+                    "name": "Create Package",
+                    "i18n": "Create Package",
+                    "slug": "admin/createpackage"
+                },
+				 {
+                    "url": "admin/packagelist",
+                    "name": "Package List",
+                    "i18n": "Package List",
+                    "slug": "admin/packagelist"
+                },
+                {
+                    "url": "admin/paybylist",
+                    "name": "Payment Method List",
+                    "i18n": "Payment Method List",
+                    "slug": "admin/paybylist"
+                },
+
+
+                {
+                    "url": "admin/createpayby",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
+                    "slug": "admin/createpayby"
+                },
+                {
+                    "url": "admin/smsmessagesetting",
+                    "name": "SMS Setting",
+                    "i18n": "SMS Setting",
+                    "slug": "admin/smsmessagesetting"
+                },
+                {
+                    "url": "admin/printsetting",
+                    "name": "Print Setting",
+                    "i18n": "Print Setting",
+                    "slug": "admin/printsetting"
+                }
+
+
+            ]
+        }
+
+
+
+    ]
+}
