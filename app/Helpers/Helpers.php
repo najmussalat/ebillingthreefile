@@ -1,7 +1,7 @@
 <?php // Code within app\Helpers\Helper.php
 
 namespace App\Helpers;
-use Illuminate\Support\Facades\Config;
+use Config;
 class Helper
 {
     public static function applClasses()

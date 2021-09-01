@@ -19,23 +19,23 @@ class AdminObserver
      */
     public function created(Admin $admin)
     {
-        $url = "http://66.45.237.70/api.php";
-        $number=$admin->phone;
-        $text=("Dear ".$admin->name .', '." Ebill verify OTP ".$admin->otp);
-        $data= array(
-        'username'=>"mtshoes",
-        'password'=>"76PCMA9D",
-        'number'=>"$number",
-        'message'=>"$text"
-        );
-        //dd($data); exit;
-        $ch = curl_init(); // Initialize cURL
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $smsresult = curl_exec($ch);
-        $p = explode("|",$smsresult);
-        $sendstatus = $p[0];
+        // $url = "http://66.45.237.70/api.php";
+        // $number=$admin->phone;
+        // $text=("Dear ".$admin->name .', '." Ebill verify OTP ".$admin->otp);
+        // $data= array(
+        // 'username'=>"mtshoes",
+        // 'password'=>"76PCMA9D",
+        // 'number'=>"$number",
+        // 'message'=>"$text"
+        // );
+        // //dd($data); exit;
+        // $ch = curl_init(); // Initialize cURL
+        // curl_setopt($ch, CURLOPT_URL,$url);
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // $smsresult = curl_exec($ch);
+        // $p = explode("|",$smsresult);
+        // $sendstatus = $p[0];
         $data = [
             'name' => $admin['name'],
             'superadminboady' => $admin['name'].' Want to Admin',

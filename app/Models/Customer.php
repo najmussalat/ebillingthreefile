@@ -9,6 +9,7 @@ class Customer extends Model
 {
 	use SoftDeletes;
 	protected $fillable=[
+	'uuid',
 	'loginid',
 	'customername',
 	'contactperson',
@@ -19,7 +20,6 @@ class Customer extends Model
 	'buildingname',
 	'idnumber',
 	'idnumbertype',
-	'otheridtype',
 	'houseno',
 	'floor',
 	'post',
@@ -65,43 +65,17 @@ class Customer extends Model
 	'photo',
 	'infoimage',
 	'path',
-	'status',
 	'password'
 	];
 	protected $hidden = [
 		'password', 'remember_token',
 	];
 	protected $dates = ['deleted_at'];
-	protected $casts = [
-		'created_at' => 'datetime:M d Y',
-	];
 public static function boot()
 {
     parent::boot();
     self::creating(function ($model) {
-       $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' =>'NAQW']);
+        $model->uuid = IdGenerator::generate(['table' => 'customers','field'=>'uuid', 'length' => 10, 'prefix' =>'ASA-']);
     });
-}
-public function package()
-{
-	return $this->belongsTo('App\Models\Package');
-}
-
-public function district()
-{
-	return $this->belongsTo('App\Models\District');
-}
-public function thana()
-{
-	return $this->belongsTo('App\Models\Thana');
-}
-public function area()
-{
-	return $this->belongsTo('App\Models\Area');
-}
-
-public function bill()
-{
-	return $this->hasMany('App\Models\Bill');
 }
 }

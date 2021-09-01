@@ -19,8 +19,4 @@ class Package extends Model
     {
         return $this->belongsTo('App\Models\Merchant');
     }
-    public function customer()
-    {
-        return $this->hasOne('App\Models\Customer');
-    }
 }

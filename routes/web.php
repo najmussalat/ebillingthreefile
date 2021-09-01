@@ -7,13 +7,16 @@ use App\Http\Controllers\LanguageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
+// Route::get('/', function () {
+//        // return view('welcome');
+//     }
 
+// );
 
 //gobal location 
 Route::get('/location', 'OnchangeController@index');
 Route::get('getdistrict/{id}', 'OnchangeController@district');
 Route::get('getthana/{id}', 'OnchangeController@thana');
-Route::get('getarea/{id}', 'OnchangeController@area');
 Route::get('gettpackageinfo/{id}', 'OnchangeController@package');
 Route::get('getcustomerinfo', 'OnchangeController@customerinfo');
 
@@ -329,65 +332,62 @@ Route::post('merchantstatus', 'MerchantController@setapproval');
      
     //createpackage  End
   
-    //payby Start
-    Route::get('paybylist','PaybyController@index');
-    Route::get('createpayby','PaybyController@create');
-    Route::post('createpayby','PaybyController@store');
-    Route::get('editpayby/{id}','PaybyController@edit');
-     Route::patch('updatepayby/{id}','PaybyController@update');
-     Route::delete('deletepayby/{id}','PaybyController@destroy');
-   Route::post('searchpayby', 'PaybyController@search');
-     
-    //payby  End
-  
 
 //Customer Start
 Route::get('customerlist','CustomerController@index');
-Route::get('pendingcustomerlist','CustomerController@pendingcustomer');
 Route::get('createcustomer','CustomerController@create');
 Route::post('createcustomer','CustomerController@store');
 Route::get('editcustomer/{id}','CustomerController@edit');
-Route::get('customerprofile/{id}','CustomerController@show');
+Route::get('showcustomer/{id}','CustomerController@show');
+Route::get('viewcustomer/{id}','CustomerController@view');
  Route::patch('updatecustomer/{id}','CustomerController@update');
  Route::delete('deletecustomer/{id}','CustomerController@destroy');
 Route::post('customerstatus', 'CustomerController@setapproval');
 Route::post('searchcustomer', 'CustomerController@searchmedicine');
-Route::get('findbill/{id}','CustomerController@findbill');
-Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
-Route::get('inactivecustomer','CustomerController@inactivecustomer');
-Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
-Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
+Route::get('customerpaynow','CustomerController@customerpaynow');
+Route::get('openticket','CustomerController@openticket');
+Route::get('paymenthistory','CustomerController@paymenthistory');
+Route::get('tickethistory','CustomerController@tickethistory');
+Route::get('newconnectionrqst','CustomerController@newconnectionrqst');
+Route::get('ncrreference','CustomerController@ncrreference');
+Route::get('packages','CustomerController@packages');
+Route::get('ticketdetail','CustomerController@ticketdetail');
+Route::get('contact','CustomerController@contact');
+Route::get('reselerdashboard','CustomerController@reselerdashboard');
+Route::get('invoice','CustomerController@invoice');
+Route::get('invoicesetting','CustomerController@invoicesetting');
+Route::get('twobillperpage','CustomerController@twobillperpage');
+Route::get('threebillperpage','CustomerController@threebillperpage');
+Route::get('padinvoice','CustomerController@padinvoice');
+Route::get('invoicesettingtwo','CustomerController@invoicesettingtwo');
 //Customer  End
-//sms Start
-Route::get('smsmessagesetting','SmsController@index');
-Route::patch('updatesmssetting/{id}','SmsController@update');
-Route::get('printsetting','PrintController@index');
-Route::patch('updateprintsetting/{id}','PrintController@update');
 
-//sms  End
+//Medicineinfo Start 
 
-//print
-Route::get('monthlyprint','PrintController@monthly');
-Route::get('printlocationwise','PrintController@printlocationwise');
-Route::get('billlocationwise','PrintController@billlocationwise');
-Route::get('printbylocation','PrintController@printbylocation');
+Route::get('medicineinformationlist','MedicineinformationController@index');
+Route::get('createmedicineinformation','MedicineinformationController@create');
+Route::post('createmedicineinformation','MedicineinformationController@store');
+Route::get('editmedicineinformation/{id}','MedicineinformationController@edit');
+ Route::patch('updatemedicineinformation/{id}','MedicineinformationController@update');
+ Route::delete('deletemedicineinformation/{id}','MedicineinformationController@destroy');
+Route::post('medicineinfostatus', 'MedicineinformationController@setapproval');
+Route::post('searchmedicine', 'MedicineinformationController@searchmedicine');
+
+//Medisineinfo  End
 
 
-//print end
-//Collection Start 
+//Blog Start 
 
-Route::get('collection','CollectionController@index');
-Route::get('createcollection','CollectionController@create');
-Route::post('createcollection','CollectionController@store');
-Route::get('editcollect/{id}','CollectionController@edit');
- Route::put('updatecollection/{id}','CollectionController@update');
- Route::get('deleteblog/{id}','CollectionController@destroy');
-Route::post('blogstatus', 'CollectionController@setapproval');
-Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer');
-Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
-Route::get('cancelcollection', 'CollectionController@cancelcollection');
-Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
-//Collection  End
+Route::get('bloglist','BlogController@index');
+Route::get('createblog','BlogController@create');
+Route::post('createblog','BlogController@store');
+Route::get('editblog/{id}','BlogController@edit');
+ Route::patch('updateblog/{id}','BlogController@update');
+ Route::get('deleteblog/{id}','BlogController@destroy');
+Route::post('blogstatus', 'BlogController@setapproval');
+Route::post('searchblog', 'BlogController@searchblog');
+
+//Blog  End
 
 
        

@@ -1,15 +1,12 @@
 <?php
 namespace App\Helpers;
+use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Country;
-use App\Models\Package;
-use App\Models\Smssent;
 use App\Models\District;
 use App\Models\Division;
+use App\Models\Package;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
-use App\Models\Payby;
-use App\Models\Printsetting;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Request; 
 
@@ -291,98 +288,6 @@ public static function Divisionname(){
     public static function Packageame(){
         return Package::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('packagename','id');
         
-        }
-        public static function Payname(){
-            return Payby::whereadmin_id(Auth::guard('admin')->user()->id)->pluck('paybyname','id');
-            
-            }
-
-            public static function printsetting(){
-                return Printsetting::whereadmin_id(Auth::guard('admin')->user()->id)->first();
-                
-                }
-
-        public static function sentsmscustomer($smsinfo){
-            $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-         
-            $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#RATE#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['monthlypayment']], $smssetting->newcustomermessage);
-     
-   
-      if($smssetting->newcustomer==1){
-      // $number=$smsinfo->phone;
-      $number=$smsinfo['mobile'];
-     $dataall= array(
-       'username'=>"mtshoes",
-       'password'=>"76PCMA9D",
-       'number'=>$number,
-       'message'=>$text
-       );
- 
-   $url = "http://66.45.237.70/api.php";
-       $ch = curl_init(); // Initialize cURL
-       curl_setopt($ch, CURLOPT_URL,$url);
-       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       $smsresult = curl_exec($ch);
-       $p = explode("|",$smsresult);
-       $sendstatus = $p[0];
-
-   }
-        }
-        public static function sentsmscustomerbillpaid($smsinfo){
-            $smssetting=Smssent::whereadmin_id(Auth::id())->firstOrFail();
-         
-            $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#AMOUNT#','#DUE#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['paid'],$smsinfo['due']], $smssetting->paymentmessage);
-     
-   
-      if($smssetting->payment==1){
-      // $number=$smsinfo->phone;
-      $number=$smsinfo['mobile'];
-     $dataall= array(
-       'username'=>"mtshoes",
-       'password'=>"76PCMA9D",
-       'number'=>$number,
-       'message'=>$text
-       );
- 
-   $url = "http://66.45.237.70/api.php";
-       $ch = curl_init(); // Initialize cURL
-       curl_setopt($ch, CURLOPT_URL,$url);
-       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       $smsresult = curl_exec($ch);
-       $p = explode("|",$smsresult);
-       $sendstatus = $p[0];
-
-   }
-        }
-
-        public static function sentsmsbillcreate($smsinfo){
-            $smssetting=Smssent::whereadmin_id($smsinfo['adminid'])->firstOrFail();
-         
-            $text= str_replace(['#CUSTOMER_NAME#', '#CUSTOMER_ID#','#EXPIRY_DATE#'], [$smsinfo['name'], $smsinfo['id'],$smsinfo['expeirydate']], $smssetting->billingmessage);
-     //dd($text);
-   
-      if($smssetting->billing==1){
-      // $number=$smsinfo->phone;
-      $number=$smsinfo['mobile'];
-     $dataall= array(
-       'username'=>"mtshoes",
-       'password'=>"76PCMA9D",
-       'number'=>$number,
-       'message'=>$text
-       );
- 
-   $url = "http://66.45.237.70/api.php";
-       $ch = curl_init(); // Initialize cURL
-       curl_setopt($ch, CURLOPT_URL,$url);
-       curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($dataall));
-       curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-       $smsresult = curl_exec($ch);
-       $p = explode("|",$smsresult);
-       $sendstatus = $p[0];
-
-   }
         }
     
 }

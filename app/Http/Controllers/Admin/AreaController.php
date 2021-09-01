@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Models\Area;
-use App\Models\Thana;
 use App\Models\Division;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -19,7 +18,7 @@ class AreaController extends Controller
         $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
             $division=Area::whereadmin_id(Auth::id())->orderBy('areaname','ASC')->paginate(10);
            // dd($thana);exit;
-            return view('admin.area.index')->with('areainfo',$division)->with('pageConfigs',$pageConfigs)->with('i', (request()->input('page', 1) - 1) * 10);
+            return view('admin.area.index')->with('areainfo',$division)->with('pageConfigs',$pageConfigs)->with('i', (request()->input('page', 1) - 1) * 10);;
         }
       
       
@@ -29,15 +28,15 @@ class AreaController extends Controller
         ];
       
           $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-        $thana=Thana::pluck('thana','id');
-        return view('admin.area.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('thana', $thana);
+        
+        return view('admin.area.create', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
       
         }
       
       
       public function store(Request $request){
          $this->validate($request,[
-           'thana_id'=>'required',
+           
           'areaname' =>['required','min:1', 'max:60', Rule::unique('areas')->where(function ($query) {
       return $query->where('admin_id', Auth::user()->id);
        })   ], 
@@ -49,7 +48,6 @@ class AreaController extends Controller
       ]);
           $div = new Area;
           $div->admin_id =Auth::id();
-          $div->thana_id =trim($request->thana_id);
           $div->areaname =trim($request->areaname);
            $div->save();
      
@@ -69,10 +67,10 @@ class AreaController extends Controller
         $breadcrumbs = [
                ['link' => "admin", 'name' => "Home"], ['link' => "admin/arealist", 'name' => "Area"], ['name' => "edit"],
            ];
-           $thana=Thana::pluck('thana','id');
+         
              $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
            $divisioninfo=Area::whereadmin_id(Auth::id())->find($id);
-           return view('admin.area.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('countryinfo',$divisioninfo)->with('thana', $thana);
+           return view('admin.area.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('countryinfo',$divisioninfo);
          
            }
 
@@ -80,14 +78,12 @@ class AreaController extends Controller
 
            public function update(Request $request,$id){
             $this->validate($request,[
-              'thana_id'=>'required',
               'areaname' =>['required','min:1', 'max:60', Rule::unique('areas')->ignore($id, 'id')->where(function ($query) {
                 return $query->where('admin_id', Auth::user()->id);
                  })   ],  
    
            ]);
              $div = Area::find($id);
-             $div->thana_id =trim($request->thana_id);
              $div->areaname =trim($request->areaname);
               $div->save();
         
@@ -106,7 +102,7 @@ class AreaController extends Controller
 
          public function destroy($id){
          
-             $divisioninfo=Area::whereadmin_id(Auth::id())->findOrFail($id)->delete();
+             $divisioninfo=Area::whereadmin_id(Auth::id())->destroy($id);
             if($divisioninfo){
               Toastr::success("Area Delete Successfully", "Well Done");
                    return Redirect::to('admin/arealist'); 

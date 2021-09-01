@@ -1,15 +1,28 @@
 <h4 class="card-title">Personal Information</h4>
+<div class="row">
+    {{-- <div class="input-field col m6 s12">
+        {!! Form::text('customerid', null, ['id' => 'customerid', 'required']) !!}
+        {!! Form::label('customerid', ' * Customer ID') !!}
 
+    </div> --}}
+
+    <div class="input-field col m12 s12">
+        {!! Form::text('loginid', null, ['id' => 'loginid', 'required']) !!}
+        {!! Form::label('loginid', '* Login ID') !!}
+
+    </div>
+
+</div>
 
 <div class="row">
     <div class="input-field col m6 s12">
-        {!! Form::text('password', null, ['id' => 'loginpass', 'required']) !!}
+        {!! Form::password('password', null, ['id' => 'loginpass', 'required']) !!}
         {!! Form::label('loginpass', ' * Login Password') !!}
 
     </div>
 
     <div class="input-field col m6 s12">
-        {!! Form::text('repassword', null, ['id' => 'logtrtypepass', 'required']) !!}
+        {!! Form::password('repassword', null, ['id' => 'logtrtypepass', 'required']) !!}
         {!! Form::label('logtrtypepass', '* Retype password') !!}
 
     </div>
@@ -32,15 +45,17 @@
 </div>
 
 <div class="row">
-    <div class="input-field col m6 s12">
-        {!! Form::email('email', null, ['id' => 'email']) !!}
-        {!! Form::label('email', 'Email') !!}
+    <div class="input-field col m12 s12">
+        {!! Form::email('email', null, ['id' => 'customeremail']) !!}
+        {!! Form::label('customeremail', 'Email') !!}
 
     </div>
-    <div class="input-field col m6 s12">
-        {!! Form::text('customerprofession', null, ['id' => 'customerprofession']) !!}
-        {!! Form::label('customerprofession', 'Professional Detail') !!}
-    </div>
+
+    {{-- <div class="input-field col m6 s12">
+        {!! Form::text('customeridno', null, ['id' => 'customeridno']) !!}
+        {!! Form::label('customeridno', 'Id No.') !!}
+
+    </div> --}}
 
 </div>
 <div class="row">
@@ -57,13 +72,18 @@
     </div>
 
 </div>
-
- <div class="row">
-    <div class="input-field col m4 s12">
-        {!! Form::text('idnumber', null, ['id' => 'idnumber','required']) !!}
-        {!! Form::label('idnumber', '* NID/Passport/Other') !!}
+<div class="row">
+    <div class="input-field col m6 s12">
+        {!! Form::text('customerprofession', null, ['id' => 'customerprofession']) !!}
+        {!! Form::label('customerprofession', 'Professional Detail') !!}
     </div>
-    <div class="col m4 s12 file-field input-field" id="idinfo">
+</div>
+ <div class="row">
+    <div class="input-field col m6 s12">
+        {!! Form::text('idnumber', null, ['id' => 'idnumber']) !!}
+        {!! Form::label('idnumber', 'NID/Passport/Other') !!}
+    </div>
+    <div class="col m6 s12 file-field input-field">
        
        <p>
 
@@ -76,16 +96,12 @@
                <span>Passport</span>
            </label>
            <label>
-            <input class="with-gap " name="idnumbertype" value="Other" type="radio" id="idnumbertype" />
+            <input class="with-gap" name="idnumbertype" value="Other" type="radio" />
             <span>Other</span>
         </label>
       
        </p>
    </div>
-   <div class="input-field col m4 s12 otyertiype-hide">
-    {!! Form::text('otheridtype', null, ['id' => 'otheridtype']) !!}
-    {!! Form::label('otheridtype', '* Other') !!}
-</div>
 </div>
 <h4 class="card-title">Address</h4>
 <div class="row">
@@ -112,11 +128,9 @@
      
          </div>
          <div class="input-field col m6 s12">
-            <select class="select2 browser-default" id="area_id" name="area_id" required>
-                 <option value="">Select Area *</option>
-               </select>
-     
-         </div>
+            {!! Form::select('area_id', \App\Helpers\CommonFx::Areaname(), null, ['id' => 'area_id', 'required', 'class' => '']) !!}
+            {!! Form::label('area_id', 'Area Name *') !!}
+        </div>
    
 </div>
 
@@ -189,7 +203,7 @@
 <div class="row">
 <div class="input-field col m6 s12">
 {!! Form::text('mac', null, ['id' => 'mac']) !!}
-{!! Form::label('mac', ' MAC') !!}
+{!! Form::label('mac', '* MAC') !!}
 
 </div>
 
@@ -220,7 +234,7 @@
 
 </div>
 <div class="input-field col m6 s12">
-{!! Form::text('scrtnamepass', null, ['id' => 'scrtnamepass']) !!}
+{!! Form::password('scrtnamepass', null, ['id' => 'scrtnamepass']) !!}
 {!! Form::label('scrtnamepass', 'Password') !!}
 
 </div>
@@ -281,7 +295,7 @@
 
 <div class="row">
 <div class="input-field col m6 s12">
-{!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required','placeholder'=>'select package']) !!}
+{!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required']) !!}
 {!! Form::label('monthlyrent', '* Monthly Rent',['class' => 'active']) !!}
 
 </div>
@@ -325,7 +339,7 @@
 </div>
 <div class="row">
 <div class="input-field col m6 s12">
-{!! Form::number('totalshow', null, ['id' => 'total','disabled','step'=>'any']) !!}
+{!! Form::number('totalshow', null, ['id' => 'total','disabled']) !!}
 <input type="hidden" name="total"  id="intotal" value="">
 {{-- {!! Form::label('total', 'Total') !!} --}}
 
@@ -421,7 +435,7 @@ Type of Connectivity
 </div>
 <div class="row">
 <div class="input-field col m4 s12">
-{!! Form::select('connectedby', ['{{Auth::id}}' => Auth::user()->name], null, ['id' => 'connectedby', 'class' => '']) !!}
+{!! Form::select('connectedby', ['L' => 'Bangladesh', 'S' => 'India'], null, ['id' => 'connectedby', 'class' => '']) !!}
 {!! Form::label('connectedby', 'Connected By') !!}
 </div>
 
@@ -431,8 +445,8 @@ Type of Connectivity
 
 </div>
 <div class="input-field col m4 s12">
-    {!! Form::select('status', ['1' => 'Active', '2' => 'Pending'], 2, ['id' => 'status', 'class' => '']) !!}
-    {!! Form::label('status', '* Customer Status ') !!}
+    {!! Form::select('status', ['1' => 'Active', '2' => 'InActive'], 1, ['id' => 'connectedby', 'class' => '']) !!}
+    {!! Form::label('connectedby', '* Customer Status ') !!}
     </div>
 </div>  
 

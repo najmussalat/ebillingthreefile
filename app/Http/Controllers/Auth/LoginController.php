@@ -91,7 +91,7 @@ class LoginController extends Controller
             $check->update(array('email_verified_at' => Carbon::now(), 'status' => 1));
             return redirect('/login/admin')
                 ->withErrors([
-                    'status' => 'Phone Number Verified, Please Login'
+                    'status' => 'Your Phone Verify Done Please Login'
                 ]);
 
             $data = [
@@ -167,7 +167,7 @@ class LoginController extends Controller
     {
 
         $this->validate($request, [
-            'email'   => 'required|email|exists:admins,email',
+            'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
         $remember = (!empty($request->remember)) ? TRUE : FALSE;

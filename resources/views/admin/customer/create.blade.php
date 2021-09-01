@@ -10,7 +10,8 @@
                                
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                                                       
+                                        <h4 class="card-title">Package Form</h4>
+                                     
                                         {!! Form::open(array('url' => 'admin/createcustomer','method'=>'POST','files'=>true )) !!}
                                     
                                             @include('admin.customer.form')
@@ -67,13 +68,12 @@ $(".card-alert .close").click(function () {
         success:function(data) {
            if(data){
                     // $('#district_id').empty();
-                   //console.log(data);
+                   console.log(data);
                     $.each(data, function(key, value){
                        // alert(key);
                         $('#district_id').append('<option value="'+value.id+'">' + value.district + '</option>');
 
                     });
-                    $('#district_id').append(' <option  value="" selected disabled>Select District *</option>');
                 }
 
             },
@@ -100,33 +100,6 @@ $(".card-alert .close").click(function () {
                         $('#thana_id').append('<option value="'+value.id+'">' + value.thana + '</option>');
 
                     });
-                    $('#thana_id').append(' <option  value="" selected disabled>Select Thana *</option>');
-                }
-
-            },
-    });
-    });
-
-//for area
-$('#thana_id').change(function(){
-            $('#area_id').empty();
-
-    var thanaid = $(this).val();
-
-    $.ajax({
-        type: "GET",
-        url: url + '/getarea/'+thanaid,
-        data:{},
-        dataType: "JSON",
-        success:function(data) {
-           if(data){
-                 
-                    $.each(data, function(key, value){
-                       // alert(key);
-                        $('#area_id').append('<option value="'+value.id+'">' + value.areaname + '</option>');
-
-                    });
-                    $('#area_id').append(' <option  value="" selected disabled>Select Area *</option>');
                 }
 
             },
@@ -180,18 +153,6 @@ $(function() {
             $('.mikrotic-hide').show(); 
         } else {
             $('.mikrotic-hide').hide(); 
-        } 
-    });
-});
-
-$(function() {
-    $('.otyertiype-hide').hide(); 
-    $('#idinfo').click(function(){
-    
-        if($('#idnumbertype').is(':checked')) {
-            $('.otyertiype-hide').show(); 
-        } else {
-            $('.otyertiype-hide').hide(); 
         } 
     });
 });

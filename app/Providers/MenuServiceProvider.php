@@ -25,18 +25,18 @@ class MenuServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-      //  get all data from menu.json file
-        $verticalMenuJson = file_get_contents(base_path('resources/json/verticalMenu.json'));
+        // get all data from menu.json file
+        // $verticalMenuJson = file_get_contents(base_path('resources/json/verticalMenu.json'));
 
-        $verticalMenuData= json_decode($verticalMenuJson);
-        $horizontalMenuJson=file_get_contents(base_path('resources/json/horizontalMenu.json'));
-        $horizontalMenuData= json_decode($horizontalMenuJson);
+        // $verticalMenuData= json_decode($verticalMenuJson);
+        // $horizontalMenuJson=file_get_contents(base_path('resources/json/horizontalMenu.json'));
+        // $horizontalMenuData= json_decode($horizontalMenuJson);
 
-       // share all menuData to all the views
+        // share all menuData to all the views
 
 
 
-        View::share('menuData',[$verticalMenuData, $horizontalMenuData]) ;
+        // View::share('menuData',[$verticalMenuData, $horizontalMenuData]) ;
         view()->composer('admin/*', function ($view) {
         //my desing
         $verticalAdminMenuJson = file_get_contents(base_path('resources/json/verticalAdminMenu.json'));

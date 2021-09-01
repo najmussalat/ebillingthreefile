@@ -1,7 +1,7 @@
 <div class="row">
 
     <div class="input-field col m12 s12">
-        {!!Form::select('division',$division,null, array('id'=>'district_id','required','class'=>'select2 browser-default','placeholder'=>'Select Division'))!!}
+        {!!Form::select('division',$division,null, array('id'=>'district_id','required','class'=>'select2 browser-default','placeholder'=>'Select District'))!!}
         
         
     </div>

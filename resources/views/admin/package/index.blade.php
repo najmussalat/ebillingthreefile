@@ -29,11 +29,10 @@
                                               
                                                       <tr>
                                                          <td>SL</td>
-                                                   
+                                                          <th>Date</th>
                                                           <th>Package </th>
                                                          <th>Price</th>
                                                          <th>Merchant</th>
-                                                         <th>Description</th>
                                                          <th>Edit</th>
                                                           <th>Delete</th>
                                                       </tr>
@@ -43,11 +42,11 @@
                                                     @foreach ($infos as $info)
                                                        <tr>
                                                             <td>{{++$i}}</td>
-                                                         
+                                                          <td>{{$info->created_at->diffForHumans()}}</td>
                                                           <td>{{$info->packagename}}</td>
                                                           <td>{{$info->packageprice}}</td>
                                                           <td>{{$info->merchant->merchantname}}</td>
-                                                          <td>{{@$info->description}}</td>
+                                                          
                                                          
                                                           
                                                          <td>
