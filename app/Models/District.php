@@ -17,4 +17,9 @@ class District extends Model
     {
         return $this->hasMany('App\Models\Thana');
     }
+
+    public function customer()
+    {
+        return $this->hasMany('App\Models\Customer');
+    }
 }

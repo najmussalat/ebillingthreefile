@@ -165,7 +165,7 @@ setTimeout(timer,3000);
           success: function (d) {
             swal({
     title: "Nice Work",
-    text: "Blog De-Active Successfully",
+    text: "collection submit successfully",
     timer: 2000,
     buttons: false
   });

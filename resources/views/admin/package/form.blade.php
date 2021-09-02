@@ -11,7 +11,7 @@
     </div>
     <div class="input-field col m12 s12">
         
-        {!!Form::select('merchant_id',$marchantlist, null, array('id'=>'merchant_id','required','class'=>'select2 browser-default','placeholder'=>'Select One'))!!}
+        {!!Form::select('merchant_id',$marchantlist, null, array('id'=>'merchant_id','required','class'=>'select2 browser-default','placeholder'=>'* Select Owner/Reseller'))!!}
         
     </div>
     

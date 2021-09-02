@@ -103,7 +103,7 @@ class MerchantController extends Controller
    
          public function destroy($id){
          
-          $divisioninfo=Merchant::whereadmin_id(Auth::id())->delete($id);
+          $divisioninfo=Merchant::whereadmin_id(Auth::id())->findOrFail($id)->delete();
          if($divisioninfo){
            Toastr::success("Merchant Delete Successfully", "Well Done");
                 return Redirect::to('admin/merchantlist'); 

@@ -16,15 +16,9 @@
                                         {!! Form::model($info, array('url' =>['admin/updatecustomer',$info->id], 'method'=>'PATCH','files'=>true)) !!}
                                         <h4 class="card-title">Personal Information</h4>
                                         <div class="row">
-                                            {{-- <div class="input-field col m6 s12">
-                                                {!! Form::text('customerid', null, ['id' => 'customerid', 'required']) !!}
-                                                {!! Form::label('customerid', ' * Customer ID') !!}
-                                        
-                                            </div> --}}
-                                        
                                             <div class="input-field col m12 s12">
                                                 {!! Form::text('loginid', null, ['id' => 'loginid', 'required']) !!}
-                                                {!! Form::label('loginid', '* Login ID') !!}
+                                                {!! Form::label('loginid', '* Login ID (Customer ID)') !!}
                                         
                                             </div>
                                         
@@ -80,30 +74,34 @@
                                                 {!! Form::label('customerprofession', 'Professional Detail') !!}
                                             </div>
                                         </div>
-                                         <div class="row">
-                                            <div class="input-field col m6 s12">
+                                         <div class="row" id="idinfo">
+                                            <div class="input-field col m4 s12">
                                                 {!! Form::text('idnumber', null, ['id' => 'idnumber']) !!}
-                                                {!! Form::label('idnumber', 'NID/Passport/Other') !!}
+                                                {!! Form::label('idnumber', ' * NID/Passport/Other') !!}
                                             </div>
-                                            <div class="col m6 s12 file-field input-field">
+                                            <div class="col m4 s12 file-field input-field" >
                                                
                                                <p>
                                         
                                                    <label>
-                                                       <input class="with-gap" name="idnumbertype" value="NID" type="radio" checked />
+                                                       <input class="with-gap" name="idnumbertype" value="NID" type="radio" {{ ($info->idnumbertype=="NID")? "checked" : "" }} />
                                                        <span>NID</span>
                                                    </label>
                                                    <label>
-                                                       <input class="with-gap" name="idnumbertype" value="Passport" type="radio" />
+                                                       <input class="with-gap" name="idnumbertype" value="Passport" type="radio" {{ ($info->idnumbertype=="Passport")? "checked" : ""}}/>
                                                        <span>Passport</span>
                                                    </label>
                                                    <label>
-                                                    <input class="with-gap" name="idnumbertype" value="Other" type="radio" />
+                                                    <input id="idnumbertype" class="with-gap" name="idnumbertype" value="Other" type="radio"  {{ ($info->idnumbertype=="Other")? "checked" : ""}}/>
                                                     <span>Other</span>
                                                 </label>
                                               
                                                </p>
                                            </div>
+                                           <div class="input-field col m4 s12 otyertiype-hide">
+                                            {!! Form::text('otheridtype', null, ['id' => 'otheridtype']) !!}
+                                            {!! Form::label('otheridtype', '* Other') !!}
+                                        </div>
                                         </div>
                                         <h4 class="card-title">Address</h4>
                                         <div class="row">
@@ -130,9 +128,11 @@
                                              
                                                  </div>
                                                  <div class="input-field col m6 s12">
-                                                    {!! Form::select('area_id', \App\Helpers\CommonFx::Areaname(), null, ['id' => 'area_id', 'required', 'class' => '']) !!}
-                                                    {!! Form::label('area_id', 'Area Name *') !!}
-                                                </div>
+                                                    <select class="select2 browser-default" id="area_id" name="area_id" required>
+                                                         <option value="">Select Area *</option>
+                                                       </select>
+                                             
+                                                 </div>
                                            
                                         </div>
                                         
@@ -205,7 +205,7 @@
                                         <div class="row">
                                         <div class="input-field col m6 s12">
                                         {!! Form::text('mac', null, ['id' => 'mac']) !!}
-                                        {!! Form::label('mac', '* MAC') !!}
+                                        {!! Form::label('mac', ' MAC') !!}
                                         
                                         </div>
                                         
@@ -236,7 +236,7 @@
                                         
                                         </div>
                                         <div class="input-field col m6 s12">
-                                        {!! Form::password('scrtnamepass', null, ['id' => 'scrtnamepass']) !!}
+                                        {!! Form::text('scrtnamepass', null, ['id' => 'scrtnamepass']) !!}
                                         {!! Form::label('scrtnamepass', 'Password') !!}
                                         
                                         </div>
@@ -297,7 +297,7 @@
                                         
                                         <div class="row">
                                         <div class="input-field col m6 s12">
-                                        {!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required']) !!}
+                                        {!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'required','placeholder'=>'select package']) !!}
                                         {!! Form::label('monthlyrent', '* Monthly Rent',['class' => 'active']) !!}
                                         
                                         </div>
@@ -341,8 +341,8 @@
                                         </div>
                                         <div class="row">
                                         <div class="input-field col m6 s12">
-                                        {!! Form::number('totalshow', null, ['id' => 'total','disabled']) !!}
-                                        <input type="hidden" name="total"  id="intotal" value="">
+                                        {!! Form::number('total', null, ['id' => 'total','step'=>'any']) !!}
+                                      
                                         {{-- {!! Form::label('total', 'Total') !!} --}}
                                         
                                         </div>
@@ -355,11 +355,11 @@
                                         Billing Type
                                         <p>
                                             <label>
-                                                <input class="with-gap" name="prepaidpostpaid" value="Prepaid" type="radio" checked/>
+                                                <input class="with-gap" name="prepaidpostpaid" value="Prepaid" type="radio" {{ ($info->prepaidpostpaid=="Prepaid")? "checked" : "" }} />
                                                 <span>Pre Paid</span>
                                                 </label>
                                                 <label>
-                                                <input class="with-gap" name="prepaidpostpaid" value="Postpaid" type="radio" />
+                                                <input class="with-gap" name="prepaidpostpaid" value="Postpaid" type="radio" {{ ($info->prepaidpostpaid=="Postpaid")? "checked" : "" }}  />
                                                 <span>Post Paid</span>
                                                 </label>
                                         </p>
@@ -371,11 +371,11 @@
                                         <p>
                                         
                                             <label>
-                                                <input class="with-gap" name="connection" value="Wired" type="radio" checked/>
+                                                <input class="with-gap" name="connection" value="Wired" type="radio" {{ ($info->connection=="Wired")? "checked" : "" }}  />
                                                 <span>Wired</span>
                                                 </label>
                                                 <label>
-                                                <input class="with-gap" name="connection" value="Wireless" type="radio" />
+                                                <input class="with-gap" name="connection" value="Wireless" type="radio"  {{ ($info->connection=="Wireless")? "checked" : "" }}/>
                                                 <span>Wireless</span>
                                                 </label>
                                                 
@@ -388,11 +388,11 @@
                                         
                                         
                                             <label>
-                                                <input class="with-gap" name="connectivity" value="Shared" type="radio" checked/>
+                                                <input class="with-gap" name="connectivity" value="Shared" type="radio" {{ ($info->connectivity=="Shared")? "checked" : "" }}/>
                                                 <span>Shared</span>
                                                 </label>
                                                 <label>
-                                                <input class="with-gap" name="connectivity" value="Dedicated" type="radio" />
+                                                <input class="with-gap" name="connectivity" value="Dedicated" type="radio" {{ ($info->connectivity=="Dedicated")? "checked" : "" }}/>
                                                 <span>Dedicated</span>
                                                 </label>
                                                 
@@ -437,7 +437,7 @@
                                         </div>
                                         <div class="row">
                                         <div class="input-field col m4 s12">
-                                        {!! Form::select('connectedby', ['L' => 'Bangladesh', 'S' => 'India'], null, ['id' => 'connectedby', 'class' => '']) !!}
+                                        {!! Form::select('connectedby', ['{{Auth::id}}' => Auth::user()->name], null, ['id' => 'connectedby', 'class' => '']) !!}
                                         {!! Form::label('connectedby', 'Connected By') !!}
                                         </div>
                                         
@@ -447,8 +447,8 @@
                                         
                                         </div>
                                         <div class="input-field col m4 s12">
-                                            {!! Form::select('status', ['1' => 'Active', '2' => 'InActive'], 1, ['id' => 'connectedby', 'class' => '']) !!}
-                                            {!! Form::label('connectedby', '* Customer Status ') !!}
+                                            {!! Form::select('status', ['1' => 'Active', '2' => 'Pending'], null, ['id' => 'status', 'class' => '']) !!}
+                                            {!! Form::label('status', '* Customer Status ') !!}
                                             </div>
                                         </div>  
                                         
@@ -515,17 +515,21 @@ $(".card-alert .close").click(function () {
     $(this).closest(".card-alert")
         .fadeOut("slow");
 });
-
-
+//alert('{{$info->idnumbertype}}');
+var otherareainfo = '{{$info->idnumbertype}}';
+if(otherareainfo='Other'){
+    $('.static-hide').show(); 
+}
 //console.log('{{$info->email}}');
     var divisionid = $("#division_id").val();
     var districtid = '{{$info->district_id}}';
     var thanaid = '{{$info->thana_id}}';
-  
+    var areaid = '{{$info->area_id}}';
+    $("#total").val('{{$info->total}}');
     $.ajax({
         type: "GET",
         url: url + '/getcustomerinfo/',
-        data:{divisionid,districtid},
+        data:{divisionid,districtid,thanaid},
       dataType: "JSON",
         success:function(data) {
            if(data){
@@ -547,6 +551,15 @@ $(".card-alert .close").click(function () {
                         $('#thana_id').append('<option value="'+value.id+'" selected>' + value.thana + '</option>');
                        }else{
                         $('#thana_id').append('<option value="'+value.id+'">' + value.thana + '</option>');
+                       }
+                       
+                    });
+                    $.each(data.area, function(key, value){
+                       // console.log(thanaid)
+                        if(value.id==areaid){
+                        $('#area_id').append('<option value="'+value.id+'" selected>' + value.areaname + '</option>');
+                       }else{
+                        $('#area_id').append('<option value="'+value.id+'">' + value.areaname + '</option>');
                        }
                        
                     });
@@ -610,6 +623,31 @@ $(".card-alert .close").click(function () {
     });
     });
 
+//for area
+$('#thana_id').change(function(){
+            $('#area_id').empty();
+
+    var thanaid = $(this).val();
+
+    $.ajax({
+        type: "GET",
+        url: url + '/getarea/'+thanaid,
+        data:{},
+        dataType: "JSON",
+        success:function(data) {
+           if(data){
+                 
+                    $.each(data, function(key, value){
+                       // alert(key);
+                        $('#area_id').append('<option value="'+value.id+'">' + value.areaname + '</option>');
+
+                    });
+                    $('#area_id').append(' <option  value="" selected disabled>Select Area *</option>');
+                }
+
+            },
+    });
+    });
     //for package
     $('#package_id').change(function(){
             $('#monthlyrent').empty();
@@ -629,7 +667,7 @@ $(".card-alert .close").click(function () {
 
             },
     });
-
+});
     $(function() {
     $('.static-show').hide(); 
     $('#type_id').change(function(){
@@ -655,18 +693,24 @@ $(function() {
         } 
     });
 });
+$(function() {
+  
+    $('#idinfo').click(function(){
+    
+        if($('#idnumbertype').is(':checked')) {
+            $('.otyertiype-hide').show(); 
+        } else {
+            $('.otyertiype-hide').hide(); 
+        } 
+    });
+});
 //mark:val
     $("#monthlyrent,#due,#addicrg,#discount,#advance,#vat").keyup(function(){
-    // console.log(Number($("#advance").val()));
+
         var total=isNaN((Number($("#monthlyrent").val()) + Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val())))? 0 :((Number($("#monthlyrent").val()) + (Number($("#due").val()) + Number($("#addicrg").val()))-(Number($("#advance").val())+Number($("#discount").val()))))+((Number($("#monthlyrent").val())+Number($("#addicrg").val())) *  Number($("#vat").val()))/100;
         $("#total").val(total);
-        $("#intotal").val(total);
+       
     });
-
-
-});
-
-
 
 
 

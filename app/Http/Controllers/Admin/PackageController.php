@@ -112,7 +112,7 @@ class PackageController extends Controller
   public function destroy($id)
   {
 
-    $divisioninfo = Package::whereadmin_id(Auth::id())->delete($id);
+    $divisioninfo = Package::whereadmin_id(Auth::id())->findOrFail($id)->delete();
     if ($divisioninfo) {
       Toastr::success("Package Delete Successfully", "Well Done");
       return Redirect::to('admin/packageslist');

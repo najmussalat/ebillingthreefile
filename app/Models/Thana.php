@@ -16,4 +16,13 @@ class Thana extends Model
     {
         return $this->belongsTo('App\Models\District');
     }
+    
+    public function area()
+    {
+        return $this->hasMany('App\Models\Area');
+    }
+    public function customer()
+    {
+        return $this->hasMany('App\Models\Customer');
+    }
 }

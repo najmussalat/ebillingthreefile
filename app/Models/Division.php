@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Division extends Model
 {
     protected $fillable = [
-       'id','division','country_id'
+       'id','d','country_id'
     ];
     public function country()
     {

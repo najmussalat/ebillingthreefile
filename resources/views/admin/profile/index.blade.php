@@ -128,7 +128,7 @@
                     <div class="input-field col s12">
                       <i class="material-icons prefix pt-2">web</i>
                       <input id="web" type="text" class="@error('name') is-invalid @enderror" name="web"  value="{{$admininfoid->web }}"
-                        required autocomplete="web" autofocus>
+                         autocomplete="web" autofocus>
                       <label for="web" class="center-align"> Web *</label>
                       @error('web')
                       <small class="red-text ml-10" role="alert">

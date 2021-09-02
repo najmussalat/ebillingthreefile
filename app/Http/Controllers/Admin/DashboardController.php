@@ -5,7 +5,6 @@ use notifications;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Contact;
-use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Medicineinformation;
 use App\Http\Controllers\Controller;
@@ -33,14 +32,13 @@ class DashboardController extends Controller
      
 
        
-       
-        $category=  Category::select('id','category')->get();  
+     
        
     
   
    
 
-       return view('admin.dashboard',['pageConfigs' => $pageConfigs], compact('admin','user','contact','category'));
+       return view('admin.dashboard',['pageConfigs' => $pageConfigs], compact('admin','user','contact'));
     }
 
     /**

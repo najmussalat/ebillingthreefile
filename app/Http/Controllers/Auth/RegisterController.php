@@ -88,6 +88,8 @@ class RegisterController extends Controller
         $admin= Admin::create([
             'name' => $request['name'],
             'phone' => $request['phone'],
+            'company' => $request['company'],
+            'address' => $request['address'],
             'email' => strtolower(trim($request['email'])),
             'image' =>'not-found.jpg',
             'status'=>2,

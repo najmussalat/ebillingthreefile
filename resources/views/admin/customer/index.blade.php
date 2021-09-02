@@ -1,5 +1,5 @@
 @extends('layouts.adminMaster')
-@section('title', 'Customer List')
+@section('title', ' Customer List')
 {{-- vendor styles --}}
 @section('vendor-style')
     <link rel="stylesheet" type="text/css" href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}">
@@ -27,146 +27,118 @@
 
                     <div class="col s12 m3 l3 input-field">
 
-                        <a href="{{ url('admin/createcustomer') }}" class="waves-effect waves-light  btn "><i
+                        <a href="{{ url('admin/createcustomer') }}" class="waves-effect waves-light  btn"><i
                                 class="material-icons right">gps_fixed</i> Create New</a>
                     </div>
 
                     <div class="row">
-                        <div class="col s12">
-                            <div style="overflow-x: scroll">
-                                <table id="dataTable"
-                                    class="display table table-striped table-bordered nowrap dataTable no-footer"
-                                    style="width: 1400px; font-size: 10px !important;" role="grid"
-                                    aria-describedby="dataTable_info">
-                                    <thead>
+                        <div class="col s12" style="overflow-x: scroll; scrollbar-width: thin;">
+                            <table id="dataTable" class="display table table-striped table-bordered nowrap"
+                                style="width: 100%;">
+                                <thead>
 
-                                        <tr role="row">
-                                            <td class="sorting_asc" rowspan="1" colspan="1" aria-label="SL"
-                                                style="width: 12px;">SL</td>
-                                            <td class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="ID: activate to sort column ascending"
-                                                style="width: 45px;">ID</td>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Name: activate to sort column ascending"
-                                                style="width: 46px;">Name</th>
-                                            <th class="sorting_disabled" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Address: activate to sort column ascending"
-                                                style="width: 39px;">Address</th>
-                                            <th class="sorting_disabled" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Mobile: activate to sort column ascending"
-                                                style="width: 50px;">Mobile</th>
-                                            <th class="sorting_disabled" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="IP/Username: activate to sort column ascending"
-                                                style="width: 94px;">IP/<br>Username</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Monthly Rent: activate to sort column ascending"
-                                                style="width: 38px;">Monthly <br>Rent</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Previus Due: activate to sort column ascending"
-                                                style="width: 35px;">Previus <br>Due</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Discount: activate to sort column ascending"
-                                                style="width: 41px;">Discount</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Advance: activate to sort column ascending"
-                                                style="width: 42px;">Advance</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Add Charge: activate to sort column ascending"
-                                                style="width: 35px;">Add <br>Charge</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Vat: activate to sort column ascending"
-                                                style="width: 17px;">Vat</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Bill Amount: activate to sort column ascending"
-                                                style="width: 38px;">Bill <br>Amount</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Collection Amount: activate to sort column ascending"
-                                                style="width: 46px;">Collection <br>Amount</th>
-                                            <th class="sorting" rowspan="1" colspan="1" aria-label="Total  Due"
-                                                style="width: 24px;">Total <br>Due</th>
-                                            <td class="sorting_asc" rowspan="1" colspan="1" aria-label="SL"
-                                                style="width: 12px;">Update <br> Bill</td>
-                                            <th class="sorting_disabled" rowspan="1" colspan="1" aria-label="Action"
-                                                style="width: 83px;">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+                                    <tr>
+                                        <td>SL</td>
+                                        <td>ID</td>
+                                        <th>Name</th>
+                                        <th>Address</th>
+                                        <th>Mobile</th>
+                                        <th>IP/<br>Username</th>
+                                        <th>Monthly <br>Rent</th>
+                                        <th>Previus <br>Due</th>
+                                        <th>Discount</th>
+                                        <th>Advance</th>
+                                        <th>Add <br>Charge</th>
+                                        <th>Vat %</th>
+                                        <th>Bill <br>Amount</th>
+                                        <th>Collection <br>Amount</th>
+                                        <th>Total <br>Due</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
 
 
-                                        <tr role="row" class="odd">
-                                            <td class="sorting_1">1</td>
-                                            <td>ASA-000002</td>
-                                            <td>Zahidul Islam</td>
-                                            <td>4345</td>
-                                            <td>01739898764</td>
-                                            <td>adfsdaf</td>
-                                            <td>300</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>1200</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>-900</td>
-                                            <td>1</td>
-                                            <td><a href="/admin/editcustomer/2" class="invoice-action-view"><i
-                                                        class="material-icons">edit</i></a>&nbsp;&nbsp;<a target="_blank"
-                                                    href="http://localhost/admin/customerprofile/2"
-                                                    class="invoice-action-view"><i
-                                                        class="material-icons ">remove_red_eye</i></a>&nbsp;&nbsp;<button
-                                                    type="button" name="delete" id="deleteBtn" rid="2"
-                                                    class="invoice-action-view btn-sm"><i
-                                                        class="material-icons ">delete_forever</i></button></td>
-                                        </tr>
-                                        <tr role="row" class="even">
-                                            <td class="sorting_1">2</td>
-                                            <td>ASA-000001</td>
-                                            <td>Zahid</td>
-                                            <td>4345</td>
-                                            <td>01856054702</td>
-                                            <td>admin1234@gmail.com</td>
-                                            <td>4444</td>
-                                            <td>8440</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>0</td>
-                                            <td>12884</td>
-                                            <td>1</td>
-                                            <td><a href="/admin/editcustomer/1" class="invoice-action-view"><i
-                                                        class="material-icons">edit</i></a>&nbsp;&nbsp;<a target="_blank"
-                                                    href="http://localhost/admin/customerprofile/1"
-                                                    class="invoice-action-view"><i
-                                                        class="material-icons ">remove_red_eye</i></a>&nbsp;&nbsp;<button
-                                                    type="button" name="delete" id="deleteBtn" rid="1"
-                                                    class="invoice-action-view btn-sm"><i
-                                                        class="material-icons ">delete_forever</i></button></td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
+                                </tbody>
+                                <tfoot>
 
-                                    </tfoot>
-                                </table>
+                                </tfoot>
+                            </table>
 
-
-
-                            </div>
                         </div>
 
                     </div>
                 </div>
-
             </div>
-           
         </div>
     </div>
 
 
+    <div id="UpdateBill" class="modal">
+        <div class="modal-content">
+
+
+            <div class="row">
+                <div class="input-field col m6 s12">
+                    {!! Form::number('monthlyrent', null, ['id' => 'monthlyrent', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::label('active', 'Monthly Charge') !!}
+
+                </div>
+                <div class="input-field col m6 s12">
+                    {!! Form::number('addicrg', null, ['id' => 'addicrg', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::label('addicrg', 'Additional Charge') !!}
+
+                </div>
+
+                <div class="input-field col m6 s12">
+                    {!! Form::number('discount', null, ['id' => 'discount', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::label('discount', 'Discount') !!}
+
+                </div>
+                <div class="input-field col m6 s12">
+                    {!! Form::number('due', null, ['id' => 'due', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::label('due', 'Due') !!}
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="input-field col m6 s12">
+                    {!! Form::number('advance', null, ['id' => 'advance', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::label('advance', 'Advance') !!}
+
+                </div>
+
+                <div class="input-field col m6 s12">
+                    {!! Form::number('vat', null, ['id' => 'vat', 'class' => 'validate', 'placeholder' => 'placeholder']) !!}
+                    {!! Form::label('vat', 'VAT (%)') !!}
+
+                </div>
+                <input type="hidden" value="" id="billid">
+                <input type="hidden" value="" id="customerid">
+            </div>
+            <div class="row">
+                <div class="input-field col m6 s12">
+                    {!! Form::number('total', null, ['id' => 'total', 'step' => 'any']) !!}
+
+                </div>
+                <div class="input-field col m6 s12">
+                    <button class="btn cyan waves-effect waves-light right" type="button" id="Updatemodal">Update
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
 
 
     {{-- @endcan --}}
@@ -182,61 +154,118 @@
 @section('page-script')
     <script src="{{ asset('app-assets/js/scripts/data-tables.js') }}"></script>
     <script>
-        
-
         $(document).ready(function() {
+            $(".sidenav-main").addClass("nav-collapsed");
+            $("#main").addClass("main-full");
+            $(".sidenav-main").hover(function() {
+                $(".sidenav-main").toggleClass("nav-collapsed");
+            });
 
-//             $(".sidenav-main").addClass("nav-collapsed");
-//             $("#main").addClass("main-full");
-//             $(".sidenav-main").hover(function(){
-//                 $(".sidenav-main").toggleClass("nav-collapsed");
-// });
- 
             $('#dataTable').DataTable({
+                // responsive: true,
 
                 processing: true,
                 serverSide: true,
                 ajax: {
+                    // url:"{{ url('admin/pendingcustomerlist') }}",
                     url: "{{ url('admin/customerlist') }}",
 
                 },
 
                 columns: [
 
-                    {
-                        data: 'uuid',
-                        name: 'uuid',
 
+                    {
+                        data: 'DT_RowIndex',
+                        orderable: false,
+                        searchable: false
                     },
                     {
-                        data: 'connectiondate',
-                        name: 'connectiondate',
-
-
+                        data: 'loginid',
+                        name: 'loginid',
                     },
+
                     {
                         data: 'customername',
                         name: 'customername',
 
                     },
-
+                    {
+                        data: 'address',
+                        name: 'houseno',
+                        orderable: false
+                    },
 
                     {
                         data: 'customermobile',
                         name: 'customermobile',
-
-                    }, {
-                        data: 'houseno',
-                        name: 'houseno',
+                        orderable: false
+                    },
+                    {
+                        data: 'secretname',
+                        name: 'secretname',
+                        orderable: false
+                    },
+                    {
+                        data: 'monthlyrent',
+                        name: 'monthlyrent',
 
                     },
+                    {
+                        data: 'due',
+                        name: 'due',
+
+                    },
+                    {
+                        data: 'discount',
+                        name: 'discount',
+
+                    },
+                    {
+                        data: 'advance',
+                        name: 'advance',
+
+                    },
+                    {
+                        data: 'addicrg',
+                        name: 'addicrg',
+
+                    },
+                    {
+                        data: 'vat',
+                        name: 'vat',
+
+                    },
+                    {
+                        data: 'billamount',
+                        name: 'billamount',
+
+                    },
+                    {
+                        data: 'collection',
+                        name: 'collection',
+
+                    },
+                    {
+                        data: 'duetotal',
+                        name: 'duetotal',
+                        orderable: false
+                    },
+ {
+                        data: 'status',
+                        name: 'status',
+                        orderable: false
+                    },
+
 
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false
                     }
+
                 ]
+
             });
             //Delete Admin
             $(document).on('click', '#deleteBtn', function() {
@@ -252,7 +281,7 @@
                     data: {},
                     success: function(data) {
                         if (data) {
-                            toastr.warning('customer delete');
+                            toastr.warning('customer Inactive');
                             //location.reload();
                             $('#dataTable').DataTable().ajax.reload();
 
@@ -263,8 +292,153 @@
                     }
                 });
             });
+
             //Delete Admin end
 
+
+            $(document).on('click', '#UpdateBillBtn', function() {
+
+                $billid = $(this).attr('uid');
+                //console.log($roomid);
+                $info_url = url + '/admin/findbill/' + $billid;
+                $.ajax({
+                    url: $info_url,
+                    method: "get",
+                    type: "GET",
+                    data: {},
+                    success: function(data) {
+                        if (data) {
+                            //   console.log(data);
+
+                            $("#billid").val(data.info.id);
+                            $("#customerid").val(data.info.customer_id);
+                            $("#monthlyrent").val(data.info.monthlyrent);
+                            $("#addicrg").val(data.info.addicrg);
+                            $("#discount").val(data.info.discount);
+                            $("#due").val(data.info.due);
+                            $("#advance").val(data.info.advance);
+                            $("#vat").val(data.info.vat);
+                            $("#total").val(data.info.total);
+                            $('#UpdateBill').modal('open');
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+            $("#monthlyrent,#due,#addicrg,#discount,#advance,#vat").keyup(function() {
+
+                var total = isNaN((Number($("#monthlyrent").val()) + Number($("#due").val()) + Number($(
+                    "#addicrg").val())) - (Number($("#advance").val()) + Number($("#discount")
+                    .val()))) ? 0 : ((Number($("#monthlyrent").val()) + (Number($("#due").val()) +
+                    Number($(
+                        "#addicrg").val())) - (Number($("#advance").val()) + Number($(
+                        "#discount")
+                    .val())))) + ((Number($("#monthlyrent").val()) + Number($("#addicrg").val())) *
+                    Number($("#vat").val())) / 100;
+                $("#total").val(total);
+                console.log(total);
+            });
+            $(document).on('click', '#Updatemodal', function() {
+                if ($("#monthlyrent").val() == '') {
+
+                    alert('Monthly Charge Is Required');
+                    $("#monthlyrent").focus();
+                    return false;
+
+                }
+                if ($("#addicrg").val() == '') {
+                    alert('Additional Charge Is Required');
+                    $("#addicrg").focus();
+                    return false;
+
+                }
+                if ($("#discount").val() == '') {
+                    alert('discount  Is Required');
+                    $("#discount").focus();
+                    return false;
+
+                }
+                if ($("#due").val() == '') {
+                    alert('due  Is Required');
+                    $("#due").focus();
+                    return false;
+
+                }
+                if ($("#advance").val() == '') {
+                    alert('advance  Is Required');
+                    $("#advance").focus();
+                    return false;
+
+                }
+                if ($("#vat").val() == '') {
+                    alert('vat  Is Required');
+                    $("#vat").focus();
+                    return false;
+
+                }
+                if ($("#total").val() == '') {
+                    alert('total  Is Required');
+                    $("#total").focus();
+                    return false;
+
+                }
+                $info_url = url + '/admin/updatebillcustomer';
+                $.ajax({
+                    url: $info_url,
+                    method: "POST",
+                    type: "POST",
+                    data: {
+                        customerid: $("#customerid").val(),
+                        billid: $("#billid").val(),
+                        monthlyrent: $("#monthlyrent").val(),
+                        addicrg: $("#addicrg").val(),
+                        due: $("#due").val(),
+                        discount: $("#discount").val(),
+                        advance: $("#advance").val(),
+                        vat: $("#vat").val(),
+                        total: $("#total").val(),
+                    },
+                    success: function(data) {
+                        if (data) {
+                            toastr.warning('Update Successfully');
+                            $('#UpdateBill').modal('close');
+                            $('#dataTable').DataTable().ajax.reload();
+
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                });
+            });
+// admin status active in active
+
+
+$(document).on('click','.Approved', function(){
+      
+                //alert(5);
+                $statusid = $(this).attr('rid');
+                //console.log($statusid);
+                $.ajax({
+                    type: "post",
+                    url:url+'/admin/customerstatus',
+                    data: {
+                        id:$statusid,
+                        action:"allow"
+                    },
+                    dataType: "json",
+                    success: function (d) {
+                        toastr.success(d.message);
+                        $('#dataTable').DataTable().ajax.reload();
+        
+                    }
+                });
+        
+            
+        });
+        
         });
     </script>
 

@@ -232,9 +232,7 @@
     </div>
    
 </div>
-
-                   
-                   
+               
                     <div class="divider mb-3 mt-3"></div>
                    
                     <div class="row" style="display: flex">

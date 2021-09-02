@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Billgenerate;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\Sitemapgenaretor'
+    'App\Console\Commands\Billgenerate'
     ];
 
     /**
@@ -25,8 +26,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
           $schedule->command('telescope:prune')->daily();
-         $schedule->command('backup:monitor')->daily()->at('03:00');
-        $schedule->command('generate:sitemap')->daily();
+        //$schedule->command('work:billgenerate')->everyMinute();
+         $schedule->command('work:billgenerate')->monthlyOn(date('t'), '6:00');
     }
 
     /**

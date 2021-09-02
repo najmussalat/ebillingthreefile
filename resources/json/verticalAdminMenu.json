@@ -14,104 +14,79 @@
                     "slug": "admin/customerlist"
                 },
                 {
+                    "url": "admin/pendingcustomerlist",
+                    "name": "Pending Customer List",
+                    "i18n": "Pending Customer List",
+                    "slug": "admin/pendingcustomerlist"
+                },
+                {
                     "url": "admin/createcustomer",
                     "name": "Create Customer",
                     "i18n": "Create Customser",
                     "slug": "admin/createcustomer"
+                },
+                {
+                    "url": "admin/inactivecustomer",
+                    "name": "Inactive Customer",
+                    "i18n": "Inactive Customser",
+                    "slug": "admin/inactivecustomer"
                 }
-
             ]
         },
         {
             "url": "javascript:void(0)",
-            "name": "Disease",
-            "i18n": "Disease",
+            "name": "Collection",
+            "i18n": "Collection",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "disease",
+            "slug": "collection",
             "icon": "filter_vintage",
 
             "submenu": [{
-                    "url": "admin/diseaselist",
-                    "name": "Disease List",
-                    "i18n": "Disease List",
-                    "slug": "admin-diseaselist"
+                    "url": "admin/collection",
+                    "name": "Collection Search",
+                    "i18n": "Collection Search",
+                    "slug": "admin-collection"
                 },
                 {
-                    "url": "admin/createdisease",
-                    "name": "Create Disease",
-                    "i18n": "Create Disease",
-                    "slug": "createdisease"
+                    "url": "admin/createcollection",
+                    "name": "Create Collection",
+                    "i18n": "Create Collection",
+                    "slug": "createcollection"
+                },
+                {
+                    "url": "admin/cancelcollection",
+                    "name": "Cancel Collection",
+                    "i18n": "Cancel Collection",
+                    "slug": "cancelcollection"
                 }
+
 
             ]
 
         },
         {
             "url": "javascript:void(0)",
-            "name": "Medicines",
-            "i18n": "Medicines",
+            "name": "Print",
+            "i18n": "Print",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "medicines",
-            "icon": "brightness_2",
+            "slug": "print",
+            "icon": "print",
             "submenu": [{
-                    "url": "admin/medicinelist",
-                    "name": "Medicines List",
-                    "i18n": "Medicines List",
-                    "slug": "admin/medicinelist"
+                "url": "admin/monthlyprint",
+                "name": "Monthly Print",
+                "i18n": "Monthly Print",
+                "slug": "admin/monthlyprint"
                 },
                 {
-                    "url": "admin/createmedicinelist",
-                    "name": "Create Medicine",
-                    "i18n": "Create Medicine",
-                    "slug": "admin/createmedicinelist"
+                    "url": "admin/printlocationwise",
+                    "name": "Print Locationwise",
+                    "i18n": "Print Locationwise",
+                    "slug": "admin/printlocationwise"
                 }
 
             ]
         },
-        {
-            "url": "javascript:void(0)",
-            "name": "DiseaseMedicines",
-            "i18n": "DiseaseMedicines",
-            "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "diseasemedicines",
-            "icon": "beach_access",
-            "submenu": [{
-                    "url": "admin/disemedicinelist",
-                    "name": "DiseaseMedicines List",
-                    "i18n": "DiseaseMedicines List",
-                    "slug": "admin/disemedicinelist"
-                },
-                {
-                    "url": "admin/createdisemedicinelist",
-                    "name": "Create DiseaseMedicines",
-                    "i18n": "Create DiseaseMedicines",
-                    "slug": "admin/createdisemedicinelist"
-                }
-
-            ]
-        },
-        {
-            "url": "javascript:void(0)",
-            "name": "Medicineinfo",
-            "i18n": "Medicineinfo",
-            "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "medicineinfo",
-            "icon": "camera",
-            "submenu": [{
-                    "url": "admin/medicineinformationlist",
-                    "name": "Medicineinfo List",
-                    "i18n": "Medicineinfo List",
-                    "slug": "admin/medicineinformationlist"
-                },
-                {
-                    "url": "admin/createdisemedicinelist",
-                    "name": "Create Medicineinfo",
-                    "i18n": "Create Medicineinfo",
-                    "slug": "admin/createedicineinformation"
-                }
-
-            ]
-        },
+       
         {
             "url": "javascript:void(0)",
             "name": "Setting",
@@ -124,6 +99,12 @@
                     "name": "Area List",
                     "i18n": "Area List",
                     "slug": "admin/arealist"
+                },
+                {
+                    "url": "admin/createarea",
+                    "name": "Create Area",
+                    "i18n": "Create Area",
+                    "slug": "admin/createarea"
                 },
                 {
                     "url": "admin/createmerchant",
@@ -146,12 +127,39 @@
                     "i18n": "Create Package",
                     "slug": "admin/createpackage"
                 },
-                {
+				 {
                     "url": "admin/packagelist",
                     "name": "Package List",
                     "i18n": "Package List",
                     "slug": "admin/packagelist"
+                },
+                {
+                    "url": "admin/paybylist",
+                    "name": "Payment Method List",
+                    "i18n": "Payment Method List",
+                    "slug": "admin/paybylist"
+                },
+
+
+                {
+                    "url": "admin/createpayby",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
+                    "slug": "admin/createpayby"
+                },
+                {
+                    "url": "admin/smsmessagesetting",
+                    "name": "SMS Setting",
+                    "i18n": "SMS Setting",
+                    "slug": "admin/smsmessagesetting"
+                },
+                {
+                    "url": "admin/printsetting",
+                    "name": "Print Setting",
+                    "i18n": "Print Setting",
+                    "slug": "admin/printsetting"
                 }
+
 
             ]
         }
