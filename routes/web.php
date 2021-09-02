@@ -1,4 +1,5 @@
 <?php 
+use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -16,6 +17,23 @@ Route::get('/smspayreceipt', function () {
     return view('admin.customer.smspayreceipt');
  }
 
+);
+Route::get('/user', function () {
+    return view('admin.customer.smspayreceipt');
+ }
+
+);
+
+Route::get('/show', function () {
+    $customer=Customer::first();
+    return view('customer.profile.show')->with('customer',$customer);
+ }
+
+);
+Route::get('/customerview', function () {
+    $customer=Customer::first();
+    return view('customer.status.customerview');
+ }
 );
 
 //gobal location 
