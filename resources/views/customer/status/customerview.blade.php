@@ -20,6 +20,7 @@
 <div class="row">
   <div class="col xl4 m4 s12">
 <div class="card card-border z-depth-2">
+
   <div class="card-content">
     <div class="row">
       <div class="col s2 pr-0 circle">
@@ -33,6 +34,7 @@
       </div>
     </div>
     <hr>
+
 <p>
   Package: 5mbps
 </p>

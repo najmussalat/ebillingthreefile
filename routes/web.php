@@ -11,28 +11,29 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/invoiceview', function () {
        return view('admin.customer.padinvoice');
     }
-
 );
 Route::get('/smspayreceipt', function () {
     return view('admin.customer.smspayreceipt');
  }
-
 );
 Route::get('/user', function () {
     return view('admin.customer.smspayreceipt');
  }
-
 );
 
 Route::get('/show', function () {
     $customer=Customer::first();
     return view('customer.profile.show')->with('customer',$customer);
  }
-
 );
 Route::get('/customerview', function () {
     $customer=Customer::first();
     return view('customer.status.customerview');
+ }
+);
+Route::get('/customersupport', function () {
+    $customer=Customer::first();
+    return view('customer.support.customersupport');
  }
 );
 
