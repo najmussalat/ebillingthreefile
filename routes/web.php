@@ -36,6 +36,11 @@ Route::get('/customersupport', function () {
     return view('customer.support.customersupport');
  }
 );
+Route::get('/cardview', function () {
+    $customer=Customer::first();
+    return view('customer.cardview.cardview');
+ }
+);
 
 //gobal location 
 Route::get('/location', 'OnchangeController@index');
