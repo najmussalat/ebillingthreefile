@@ -125,7 +125,7 @@ class PackageController extends Controller
   public function search(Request $request)
   {
     $output = "";
-    $searchvalue = Package::Where('packagename', 'LIKE', '%%%' . $request->id . "%%%")->orwhere('id', 'LIKE', '%' . $request->id . "%")->latest()->get();
+    $searchvalue = Package::Where('packagename', 'LIKE', '%%%' . $request->id . "%%%")->orwhere('packageprice', 'LIKE', '%' . $request->id . "%")->latest()->get();
     if (count($searchvalue)) {
       foreach ($searchvalue as $key => $searchval) {
         $output .= '<tr>' .

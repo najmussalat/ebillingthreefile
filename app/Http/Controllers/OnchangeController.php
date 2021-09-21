@@ -10,6 +10,8 @@ use App\Models\Division;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
+use App\Models\Payment;
+use App\Models\Smstype;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
@@ -36,16 +38,25 @@ class OnchangeController extends Controller
             return response()->json( Area::whereadmin_id(Auth::id())->wherethana_id($id)->select('id','areaname')->get()->toArray());
         
             
+                } 
+                public function smstype($id){
+            return response()->json(Smstype::find($id));
+        
+            
                 }
         
         public function package($id){
     return response()->json(Package::select('id','packageprice')->find($id));
 
     
+        }     
+        public function payment($id){
+    return response()->json(Payment::select('id','note')->find($id));
+
+    
         }
          public function customerinfo(Request $request){
-            
-             $district=District::wheredivision_id($request->divisionid)->select('id','district')->get();
+            $district=District::wheredivision_id($request->divisionid)->select('id','district')->get();
               $thana=Thana::wheredistrict_id($request->districtid)->select('id','thana')->get()->toArray();
               $area=Area::wherethana_id($request->thanaid)->select('id','areaname')->get()->toArray();
     return response()->json([

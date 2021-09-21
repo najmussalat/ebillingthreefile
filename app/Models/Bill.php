@@ -28,6 +28,6 @@ class Bill extends Model
     }
     public function customer()
     {
-        return $this->belongsTo('App\Models\Customer')->ordeBy('created_at','DESC');
+        return $this->belongsTo('App\Models\Customer');
     }
 }

@@ -1,5 +1,4 @@
 <?php 
-use App\Models\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use UniSharp\LaravelFilemanager\Lfm;
@@ -8,38 +7,10 @@ use App\Http\Controllers\LanguageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
-Route::get('/invoiceview', function () {
-       return view('admin.customer.padinvoice');
+Route::get('/testview', function () {
+        return view('test.index');
     }
-);
-Route::get('/smspayreceipt', function () {
-    return view('admin.customer.smspayreceipt');
- }
-);
-Route::get('/user', function () {
-    return view('admin.customer.smspayreceipt');
- }
-);
 
-Route::get('/show', function () {
-    $customer=Customer::first();
-    return view('customer.profile.show')->with('customer',$customer);
- }
-);
-Route::get('/customerview', function () {
-    $customer=Customer::first();
-    return view('customer.status.customerview');
- }
-);
-Route::get('/customersupport', function () {
-    $customer=Customer::first();
-    return view('customer.support.customersupport');
- }
-);
-Route::get('/cardview', function () {
-    $customer=Customer::first();
-    return view('customer.cardview.cardview');
- }
 );
 
 //gobal location 
@@ -49,8 +20,8 @@ Route::get('getthana/{id}', 'OnchangeController@thana');
 Route::get('getarea/{id}', 'OnchangeController@area');
 Route::get('gettpackageinfo/{id}', 'OnchangeController@package');
 Route::get('getcustomerinfo', 'OnchangeController@customerinfo');
-
-
+Route::get('gettsmstypeinfo/{id}', 'OnchangeController@smstype');
+Route::get('getpaymentmessage/{id}', 'OnchangeController@payment');
 
 
 Route::get('/sitemap.xml', 'SitemapController@index');
@@ -59,7 +30,7 @@ Route::get('/homeoinfo.xml', 'SitemapController@homeoinfo');
 Route::get('/disease.xml', 'SitemapController@disease');
 
 Route::get('/', 'Auth\LoginController@showAdminLoginForm');
-
+Route::get('/login/user', 'Auth\LoginController@showAdminLoginForm');
 Auth::routes(['verify'=> true]);
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/admin/verificationlink/{id}', 'Auth\LoginController@showEmailveirfyForm');
@@ -72,7 +43,7 @@ Route::get('/register/admin', 'Auth\RegisterController@showAdminRegisterForm');
 
 
 Route::post('/login/admin', 'Auth\LoginController@adminLogin');
-Route::post('/login/user', 'Auth\LoginController@adminLogin');
+Route::get('/login/user', 'Auth\LoginController@showLoginuserForm');
 Route::post('/login/superadmin', 'Auth\LoginController@superadminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
 
@@ -137,8 +108,6 @@ Route::group([ 'prefix'=>'superadmin',
    //AccountRole End
 
   
-
-
    //Accountcreate Start
    Route::get('adminlist','AdminController@index');
    Route::post('searchadmin','AdminController@adminsearch');
@@ -148,76 +117,49 @@ Route::group([ 'prefix'=>'superadmin',
    Route::get('editadmin/{id}','AdminController@edit');
    Route::put('updateadmin/{id}','AdminController@update');
   Route::delete('deleteteadmin/{id}','AdminController@destroy');
-  Route::post('adminstatus', 'AdminController@setapproval'); //for inactive account status
-//   Route::post('adminsetstatusactive/{id}', 'AdminController@adminsetstatusactive');//for active account status
-
-
+  Route::post('adminstatus', 'AdminController@setapproval'); 
    //Accountcreate  End
 
-   //Deseagse Start
-   Route::get('diseaselist','DiseaseController@index');
-   Route::get('createdisease','DiseaseController@create');
-   Route::post('createdisease','DiseaseController@store');
-   Route::get('editdisease/{id}','DiseaseController@edit');
-    Route::patch('updatedisease/{id}','DiseaseController@update');
-    Route::delete('deletedisease/{id}','DiseaseController@destroy');
-Route::post('diseasestatus', 'DiseaseController@setapproval');
-   Route::post('searchdisease', 'DiseaseController@searchdisease');
-  //Deseagse  End
 
-    //Deseagsemedicineinformation Start
-    Route::get('disemedicinelist','DisemedicineController@index');
-    Route::get('createdisemedicinelist','DisemedicineController@create');
-    Route::post('createdisemedicinelist','DisemedicineController@store');
-    Route::get('editdisemedicinelist/{id}','DisemedicineController@edit');
-     Route::patch('updatedisemedicinelist/{id}','DisemedicineController@update');
-     Route::delete('deletedisemedicinelist/{id}','DisemedicineController@destroy');
- Route::post('disemedicineliststatus', 'DisemedicineController@setapproval');
-    Route::post('searchdisemedicinelist', 'DisemedicineController@searchdisemedicine');
-     
-    //Deseagsemedicineinformation  End
-  
+//smssettinglist Start 
 
-//Medisine Start
-Route::get('medicinelist','MedicineController@index');
-Route::get('createmedicinelist','MedicineController@create');
-Route::post('createmedicinelist','MedicineController@store');
-Route::get('editmedicinelist/{id}','MedicineController@edit');
- Route::patch('updatemedicinelist/{id}','MedicineController@update');
- Route::delete('deletemedicinelist/{id}','MedicineController@destroy');
-Route::post('medicinestatus', 'MedicineController@setapproval');
-Route::post('searchmedicine', 'MedicineController@searchmedicine');
-//Medisine  End
+Route::get('smssettinglist','SmsController@index');
+Route::get('editsmssetting/{id}','SmsController@edit');
+ Route::patch('updatesmssetting/{id}','SmsController@update');
+Route::post('searchsmssetting', 'SmsController@searchmedicine');
+Route::get('smstypelist', 'SmsController@smstype');
+Route::get('createsmstype', 'SmsController@createsmstype');
+Route::post('createsmstype', 'SmsController@smstypestore');
+Route::get('editsmstype/{id}', 'SmsController@editsmstype');
+Route::patch('updatesmstype/{id}', 'SmsController@smstypeupdate');
 
-//Medicineinfo Start 
+//smssettinglist  End
 
-Route::get('medicineinformationlist','MedicineinformationController@index');
-Route::get('createmedicineinformation','MedicineinformationController@create');
-Route::post('createmedicineinformation','MedicineinformationController@store');
-Route::get('editmedicineinformation/{id}','MedicineinformationController@edit');
- Route::patch('updatemedicineinformation/{id}','MedicineinformationController@update');
- Route::delete('deletemedicineinformation/{id}','MedicineinformationController@destroy');
-Route::post('medicineinfostatus', 'MedicineinformationController@setapproval');
-Route::post('searchmedicine', 'MedicineinformationController@searchmedicine');
+//salesms Start 
 
-//Medisineinfo  End
+Route::get('salesmslist','BuysmsController@index');
+Route::get('createsalesms','BuysmsController@create');
+Route::post('createsalesms','BuysmsController@store');
+Route::get('editsalesms/{id}','BuysmsController@edit');
+Route::patch('updatesalesms/{id}','BuysmsController@update');
+Route::post('searchsalesms', 'BuysmsController@searchmedicine');
+Route::post('aprovesalesms/{id}', 'BuysmsController@setapproval');
+Route::delete('deletesalesms/{id}','BuysmsController@destroy');
+//smssettinglist  End
+
+//payment Start 
+
+Route::get('paymentlist','PaymentController@index');
+Route::get('createpayment','PaymentController@create');
+Route::post('createpayment','PaymentController@store');
+Route::get('editpayment/{id}','PaymentController@edit');
+ Route::patch('updatepayment/{id}','PaymentController@update');
+ Route::delete('deletepayment/{id}','PaymentController@destroy');
+
+//payment  End
 
 
-//Blog Start 
-
-Route::get('bloglist','BlogController@index');
-Route::get('createblog','BlogController@create');
-Route::post('createblog','BlogController@store');
-Route::get('editblog/{id}','BlogController@edit');
- Route::patch('updateblog/{id}','BlogController@update');
- Route::get('deleteblog/{id}','BlogController@destroy');
-Route::post('blogstatus', 'BlogController@setapproval');
-Route::post('searchblog', 'BlogController@searchblog');
-
-//Blog  End
-
-
-//countryy 
+//countryy
 Route::get('countrylist','CountryController@index');
 Route::post('searchcountry','CountryController@search');
 Route::get('createcountry','CountryController@create');
@@ -287,12 +229,6 @@ Route::post('searchthana', 'ThanaController@searchblog');
  Route::get('allsitemap','SitemapController@allsitemap');
 
 
-// Route::get('editblog/{id}','SitemapController@edit');
-//  Route::patch('updateblog/{id}','SitemapController@update');
-//  Route::get('deleteblog/{id}','SitemapController@destroy');
-// Route::post('blogstatus', 'SitemapController@setapproval');
-// Route::post('searchblog', 'SitemapController@searchblog');
-
 //Sitemap  End
 
 //Contact Start 
@@ -303,10 +239,6 @@ Route::post('fdgfcreateblog','ContactController@store');
 Route::get('replymail/{id}','ContactController@edit');
 Route::post('replyemail','ContactController@store');
 
- //Route::patch('updateblog/{id}','ContactController@update');
- //Route::get('deleteblog/{id}','ContactController@destroy');
-//Route::post('blogstatus', 'ContactController@setapproval');
-//Route::post('searchblog', 'ContactController@searchblog');
 
 //Contact  End
 
@@ -337,7 +269,7 @@ Route::post('createarea','AreaController@store');
 Route::get('editarea/{id}','AreaController@edit');
  Route::patch('updatearea/{id}','AreaController@update');
  Route::delete('deletearea/{id}','AreaController@destroy');
-Route::post('searcharea', 'AreaController@searchblog');
+Route::post('searcharea', 'AreaController@search');
 
    //Merchant Start
    Route::get('merchantlist','MerchantController@index');
@@ -390,6 +322,7 @@ Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
 Route::get('inactivecustomer','CustomerController@inactivecustomer');
 Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
 Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
+Route::post('sendsmscustomer','CustomerController@sendsmscustomer');
 //Customer  End
 //sms Start
 Route::get('smsmessagesetting','SmsController@index');
@@ -408,14 +341,12 @@ Route::get('printbylocation','PrintController@printbylocation');
 
 //print end
 //Collection Start 
-
 Route::get('collection','CollectionController@index');
 Route::get('createcollection','CollectionController@create');
 Route::post('createcollection','CollectionController@store');
 Route::get('editcollect/{id}','CollectionController@edit');
  Route::put('updatecollection/{id}','CollectionController@update');
- Route::get('deleteblog/{id}','CollectionController@destroy');
-Route::post('blogstatus', 'CollectionController@setapproval');
+ Route::post('blogstatus', 'CollectionController@setapproval');
 Route::post('searchsinglecustomer', 'CollectionController@searchsinglecustomer');
 Route::post('searchsinglecustomerbill', 'CollectionController@singlecustomerbill');
 Route::get('cancelcollection', 'CollectionController@cancelcollection');
@@ -423,6 +354,77 @@ Route::delete('cancelcollection/{id}', 'CollectionController@collectiondelete');
 //Collection  End
 
 
+//Complain Start 
+Route::get('complainlist','ComplainController@index');
+Route::get('createcomplain','ComplainController@create');
+Route::post('createcomplain','ComplainController@store');
+Route::get('editcomplain/{id}','ComplainController@edit');
+Route::get('replycomplain/{id}','ComplainController@show');
+Route::post('replycomplaintext','ComplainController@replycomplain');
+Route::post('addcomplaintext','ComplainController@addcomplaintext');
+ Route::patch('updatecomplain/{id}','ComplainController@update');
+ Route::delete('deletecomplain/{id}','ComplainController@destroy');
+ Route::post('closecomplain/{id}','ComplainController@closecomplain');
+Route::post('searchsinglecustomerforcomplain', 'ComplainController@searchsinglecustomer');
+Route::get('complainsetting', 'ComplainController@opencomplainsetting');
+Route::post('complainsetting', 'ComplainController@storecomplainsetting');
+Route::get('editcomplainsetting/{id}', 'ComplainController@editcomplainsetting');
+Route::put('editcomplainsetting/{id}', 'ComplainController@updatecomplainsetting');
+Route::delete('deletecomplainsetting/{id}', 'ComplainController@deletecomplainsetting');
+//Complain  End
+
+//buysms Start 
+
+Route::get('buysmslist','BuysmsController@index');
+Route::get('createbuysms','BuysmsController@create');
+Route::post('createbuysms','BuysmsController@store');
+Route::get('editbuysms/{id}','BuysmsController@edit');
+Route::patch('updatebuysms/{id}','BuysmsController@update');
+Route::post('searchbuysms', 'BuysmsController@searchmedicine');
+Route::get('showbuysmsdetails/{id}', 'BuysmsController@show');
+Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
+//buysms  End
+
+
+
+   //AccountRole Start
+   Route::get('accountrolelist','RoleController@index');
+   Route::post('rolesearch','RoleController@rolesearch');
+   Route::get('createaccountrole','RoleController@create');
+   Route::post('createaccountrole','RoleController@store');
+   Route::post('allpermissionlist','RoleController@allpermissionlist');
+   Route::get('editaccountrole/{id}','RoleController@edit');
+   Route::get('showrolepermission/{id}','RoleController@show');
+   Route::put('updateaccountrole/{id}','RoleController@update');
+   Route::delete('deleteaccountrole/{id}','RoleController@destroy');
+   //AccountRole End
+
+
+   
+   //user create Start
+   Route::get('userlist','UserController@index');
+   Route::post('searchuser','UserController@search');
+   Route::post('allrolename','UserController@allrolename');
+   Route::get('createuser','UserController@create');
+   Route::post('createuser','UserController@store');
+   Route::get('edituser/{id}','UserController@edit');
+   Route::patch('updateuser/{id}','UserController@update');
+  Route::delete('deleteuser/{id}','UserController@destroy');
+  Route::post('userstatus', 'UserController@setapproval'); 
+   //user create  End
+       
+    }
+);
+
+
+Route::group([ 'prefix'=>'user',
+    'namespace'=>'User',
+    'middleware'=> 'auth',
+   
+
+    ], function() {
+        Route::get('dashboard', 'DashboardController@index');
+       
        
     }
 );

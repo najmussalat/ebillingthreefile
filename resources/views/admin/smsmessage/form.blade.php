@@ -72,7 +72,7 @@
 <div class="row card">
  
     <div class="col m12 s12 file-field input-field">
-        Openticket Sent SMS 
+        Complain  Sent SMS 
         <p>
             <label>
                 <input class="with-gap" name="openticket" value="1" type="radio" {{ ($smsmessage->openticket=="1")? "checked" : "" }} />
@@ -95,7 +95,7 @@
 <div class="row card">
  
     <div class="col m12 s12 file-field input-field">
-        Assignticket Sent SMS 
+        Complain Aprove Sent SMS 
         <p>
             <label>
                 <input class="with-gap" name="assignticket" value="1" type="radio" {{ ($smsmessage->assignticket=="1")? "checked" : "" }} />
@@ -118,7 +118,7 @@
 <div class="row card">
  
     <div class="col m12 s12 file-field input-field">
-        Updateticket Sent SMS 
+        Complain Update Sent SMS 
         <p>
             <label>
                 <input class="with-gap" name="updateticket" value="1" type="radio" {{ ($smsmessage->updateticket=="1")? "checked" : "" }} />
@@ -141,7 +141,7 @@
 <div class="row card">
  
     <div class="col m12 s12 file-field input-field">
-        Closeticket Sent SMS 
+        Complain Close Sent SMS 
         <p>
             <label>
                 <input class="with-gap" name="closeticket" value="1" type="radio" {{ ($smsmessage->closeticket=="1")? "checked" : "" }} />
@@ -163,6 +163,41 @@
 </div>
 <div class="row card">
  
+    <div class="col m12 s12 file-field input-field">
+        Complain sms to employee
+        <p>
+            <label>
+                <input class="with-gap" name="employee" value="1" type="radio" {{ ($smsmessage->employee=="1")? "checked" : "" }} />
+                <span>Yes</span>
+                </label>
+                <label>
+                <input class="with-gap" name="employee" value="0" type="radio" {{ ($smsmessage->employee=="0")? "checked" : "" }}  />
+                <span>No</span>
+                </label>
+        </p>
+        </div>
+        <div class="input-field col s12">
+    
+            {!!Form::textarea('employeemessage',null, array('id'=>'employeemessage','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}
+           
+          
+</div>
+
+</div>
+<div class="row card">
+    <div class="col m12 s12 file-field input-field">
+        Any Other   SMS 
+        <p>
+            <label>
+                <input class="with-gap" name="problem" value="1" type="radio" {{ ($smsmessage->problem=="1")? "checked" : "" }} />
+                <span>Yes</span>
+                </label>
+                <label>
+                <input class="with-gap" name="problem" value="0" type="radio" {{ ($smsmessage->problem=="0")? "checked" : "" }}  />
+                <span>No</span>
+                </label>
+        </p>
+        </div>
         <div class="input-field col s12">
     <p>Other</p>
             {!!Form::textarea('problemmessage',null, array('id'=>'problemmessage','class'=>'materialize-textarea', 'data-length'=>'160','rows' => 4, 'cols' => 54,'required'))!!}

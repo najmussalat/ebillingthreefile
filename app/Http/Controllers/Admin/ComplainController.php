@@ -4,18 +4,20 @@ namespace App\Http\Controllers\Admin;
 use Validator;
 use App\Models\Area;
 use App\Models\Bill;
+use App\Models\User;
 use App\Models\Thana;
 use App\Models\Complain;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
+use App\Jobs\Sendsuersms;
 use App\Models\Collection;
 use App\Models\Complaintext;
 use Illuminate\Http\Request;
 use App\Models\Complaindetils;
 use Illuminate\Validation\Rule;
+//use Illuminate\Database\Query\Builder;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
-//use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use GrahamCampbell\ResultType\Success;
@@ -30,7 +32,9 @@ class ComplainController extends Controller
       if (request()->ajax()) {
         return datatables()->of(Complain::with('admin','customer')->whereadmin_id(Auth::id())->latest())
           ->addColumn('action', function ($data) {
-            $button = '<a title="Reply Message" href="/admin/replycomplain/' . $data->id . '" class="iinvoice-action-view btn-sm"><i class="material-icons">reply_all</i></a>';
+            $button = '<a title="Edit Or Aprove Complain" href="/admin/editcomplain/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
+            $button .= '&nbsp;&nbsp;';
+            $button .= '<a title="Reply Message" href="/admin/replycomplain/' . $data->id . '" class="iinvoice-action-view btn-sm"><i class="material-icons">reply_all</i></a>';
             $button .= '&nbsp;&nbsp;';
             $button .= '<button type="button" title="Delete Complain"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">delete_forever
             </i></button>';
@@ -162,7 +166,7 @@ class ComplainController extends Controller
       
       
       public function store(Request $request){
-        // dd($request->complainheding[0]);exit;
+        // dd($request->all());exit;
         $this->validate($request,[
           
           'customer_id' => 'required|min:1',
@@ -178,6 +182,31 @@ class ComplainController extends Controller
          $pay->save();
           
        if($pay){
+        $info=User::whereadmin_id(Auth::id())->first();
+        if($info){
+         $customer= Customer::with('area')->find($request->customer_id);
+         $requestuser= $request->users;
+          for ($i = 0; $i < count($requestuser); $i++) {
+          
+            $user=User::find($requestuser[$i]);
+          
+              $data = [
+                'admin_id'=>Auth::id(),
+                'customercomplain' =>$request->complainheding[0],
+                'customercomment' =>$request->complainmessage,
+                'customername'=>$customer->customername,
+                'customerphone'=>$customer->customermobile,
+                'number'=>$user->phone,
+                'address'=>$customer->area->areaname,
+                'id'=>$customer->loginid,
+                'ip'=>$customer->ip,
+                'oppusername'=>$customer->oppusername,
+              ];
+              
+              Sendsuersms::dispatch($data);
+              }
+            }
+       
         $info= new Complaindetils();
         $info->complain_id =trim($pay->id);
        $info->messageby =Auth::user()->name;
@@ -203,12 +232,13 @@ $cus=Customer::find($request->customer_id);
 
       public function edit($id){
         $breadcrumbs = [
-               ['link' => "admin", 'name' => "Home"], ['link' => "admin/arealist", 'name' => "Area"], ['name' => "edit"],
+               ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/complainlist", 'name' => "Complain"], ['name' => "edit"],
            ];
-           $thana=Thana::pluck('thana','id');
+          
              $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-           $divisioninfo=Area::whereadmin_id(Auth::id())->find($id);
-           return view('admin.area.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('countryinfo',$divisioninfo)->with('thana', $thana);
+           $complain=Complain::whereadmin_id(Auth::id())->find($id);
+           $compiainin=json_decode($complain->complainheding,TRUE);
+           return view('admin.complain.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('info',$complain)->with('complaininfo',$compiainin);
          
            }
 
@@ -239,10 +269,7 @@ else{
 
       public function searchsinglecustomer(Request $request){
         if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::id())->whereHas('bill', function (Builder $query) {
-          $query->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'));
-        })->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->orwhere('id','LIKE','%'.$request->id."%")->first();
         
         if($searchvalue)
 {
@@ -262,27 +289,24 @@ return response()->json([
       }
 
 
-      public function singlecustomerbill(Request $request){
-        $output = "";
-        if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection.admin','bill.collection.payby')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
-        
-        if($searchvalue)
-{
-  
-return response()->json([
-  'result'=>$searchvalue
-
-],200);
-}
-}
-   else{
-    return response()->json([
-      'success'=>false
-    
-    ],204 );
-   }
-    
+      public function update(Request $request,$id){
+        // dd($request->all());exit;
+        $this->validate($request,[
+          
+          'customer_id' => 'required|min:1',
+          'complainmessage' => 'max:198',
+           'complainheding' => 'required',
+         ]);
+          $pay=Complain::find($id);
+          $pay->customer_id =trim($request->customer_id);
+         $pay->admin_id =Auth::id();
+         $pay->complainmessage =trim($request->complainmessage);
+        $pay->complainheding =json_encode($request->complainheding, JSON_FORCE_OBJECT);
+         $pay->save();
+       
+       Toastr::success("Complate Update Successfully", "Well Done");
+       return Redirect::to('admin/complainlist'); 
+          
       }
 
    public function replycomplain(Request $request){

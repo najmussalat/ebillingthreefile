@@ -19,7 +19,7 @@
                                       
                                       <div class="col s12 m3 l3 input-field">
                                         
-                                          <a href="{{url('superadmin/createdistrict')}}" class="waves-effect waves-light  btn "><i class="material-icons right">gps_fixed</i> Create New</a>
+                                          <a href="{{url('superadmin/createdistrict')}}" class="waves-effect waves-light  btn "><i class="material-icons right">gps_fixed</i> Create New District</a>
                                       </div>
                                      
                                       <div class="row">

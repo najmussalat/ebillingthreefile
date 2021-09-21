@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Admin;
 use App\Models\Superadmin;
 use Illuminate\Http\Request;
@@ -10,8 +11,8 @@ use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use App\Notifications\Superadminnotification;
 
+use App\Notifications\Superadminnotification;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -54,6 +55,14 @@ class LoginController extends Controller
         $pageConfigs = ['bodyCustomClass' => 'login-bg', 'isCustomizer' => false];
 
         return view('/login/admin', [
+            'pageConfigs' => $pageConfigs
+        ]);
+    }
+    public function showLoginuserForm()
+    {
+        $pageConfigs = ['bodyCustomClass' => 'login-bg', 'isCustomizer' => false];
+
+        return view('auth.loginuser', [
             'pageConfigs' => $pageConfigs
         ]);
     }
@@ -137,7 +146,8 @@ class LoginController extends Controller
 
                 return $this->loggedOut($request) ?: redirect('/login/superadmin');
             }
-        } elseif ($request->user == 'admin') {
+        } 
+        elseif ($request->user == 'admin') {
             $info = Admin::find(Auth::guard('admin')->user()->id)->update(array('remember_token' => null));
 
             if ($info) {
@@ -146,6 +156,16 @@ class LoginController extends Controller
                 $request->session()->invalidate();
 
                 return $this->loggedOut($request) ?: redirect('/login/admin');
+            }
+        } elseif ($request->user == 'user') {
+            $info = User::find(Auth::id())->update(array('remember_token' => null));
+
+            if ($info) {
+                $this->guard()->logout();
+
+                $request->session()->invalidate();
+
+                return $this->loggedOut($request) ?: redirect('/login/user');
             }
         } else {
             $this->guard()->logout();
@@ -173,7 +193,7 @@ class LoginController extends Controller
         $remember = (!empty($request->remember)) ? TRUE : FALSE;
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1,], $remember)) {
             $data = [
-                'superadminboady' => $request->email . 'Email address Now Login',
+                'superadminboady' => $request->email . ' Just Login',
             ];
 
 

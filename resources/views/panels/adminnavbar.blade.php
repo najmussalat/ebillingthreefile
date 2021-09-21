@@ -70,25 +70,9 @@
             Profile
           </a>
         </li>
-        <li>
-          <a class="grey-text text-darken-1" href="#">
-            <i class="material-icons">chat_bubble_outline</i>
-            Chat
-          </a>
-        </li>
-        <li>
-          <a class="grey-text text-darken-1" href="#">
-            <i class="material-icons">help_outline</i>
-            Help
-          </a>
-        </li>
+        
         <li class="divider"></li>
-        <li>
-          <a class="grey-text text-darken-1" href="#">
-            <i class="material-icons">lock_outline</i>
-            Lock
-          </a>
-        </li> <li><a class="grey-text text-darken-1" href="{{ route('logout') }}"
+         <li><a class="grey-text text-darken-1" href="{{ route('logout') }}"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
            <i class="material-icons">keyboard_tab</i> Sign out   </a>
        <form id="logout-form"  action="{{ route('logout') }}" method="POST" style="display: none;">

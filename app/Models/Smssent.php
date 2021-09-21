@@ -25,6 +25,24 @@ class Smssent extends Model
         'updateticketmessage',
         'closeticket',
         'closeticketmessage',
+        'problem',
+        'employee',
+        'employeemessage',
         'problemmessage',
+        'username',
+        'password',
+        'smstype_id',
+        'blance',
+        'smsrate',
     ];
+
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\Admin');
+    }
+    public function smstype()
+    {
+        return $this->belongsTo('App\Models\Smstype');
+    }
+    
 }

@@ -7,12 +7,13 @@ use App\Models\Admin;
 use App\Models\Contact;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Listeners\Sendsms;
+use App\Events\SentsmsEvent;
 use App\Observers\UserObserver;
 use App\Observers\AdminObserver;
 use App\Observers\ContactObserver;
 use App\Observers\CategoryObserver;
 use App\Observers\CustomerObserver;
-
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -26,7 +27,12 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        SentsmsEvent::class => [
+            Sendsms::class,
+            
+        ],
         Registered::class => [
+         
             SendEmailVerificationNotification::class,
         ],
     ];

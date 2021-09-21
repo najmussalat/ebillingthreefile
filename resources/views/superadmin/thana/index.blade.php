@@ -19,7 +19,7 @@
                                       
                                       <div class="col s12 m3 l3 input-field">
                                         
-                                          <a href="{{url('superadmin/createthana')}}" class="waves-effect waves-light  btn "><i class="material-icons right">gps_fixed</i> Create New</a>
+                                          <a href="{{url('superadmin/createthana')}}" class="waves-effect waves-light  btn "><i class="material-icons right">gps_fixed</i> Create New Thana</a>
                                       </div>
                                      
                                       <div class="row">
@@ -29,7 +29,7 @@
                                               
                                                       <tr>
                                                          <th>SL</th>
-                                                          <th>Date</th>
+                                                       
                                                           <th>District</th>
                                                             <th>Thana</th>
                                                           <th>Action</th>
@@ -41,8 +41,7 @@
                                                     @foreach ($thanas as $tha)
                                                        <tr>
                                                        <td>  {{++$i}}</td>
-                                                    <td>{{$tha->created_at->diffForHumans()}}</td>
-                                                       <td>{{$tha->district->district}}</td>
+                                                   <td>{{$tha->district->district}}</td>
                                                           <td>{{$tha->thana}}</td>
                                                           <td>
                                                         

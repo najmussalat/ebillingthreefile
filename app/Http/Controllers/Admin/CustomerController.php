@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Bill;
+use App\Models\Smssent;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
 use Illuminate\Support\Str;
+use App\Events\SendsmsEvent;
 use Illuminate\Http\Request;
+use App\Jobs\Sendcustomersms;
 use Illuminate\Validation\Rule;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Event;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
@@ -29,15 +33,15 @@ class CustomerController extends Controller
   public function index(Request $request)
   {
     if (request()->ajax()) {
-      return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(1)->latest())
+      return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(1))
         ->addColumn('action', function ($data) {
-          $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
+          $button ='<button type="button" id="UpdateBillBtn" style="border:0; background: none; padding: 0 !important; margin: 0 !important" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons" style="font-size: 16px; color: #F77B00;">sync</i></button>'; 
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view"><i class="material-icons">edit</i></a>';
+          $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="btn-sm" style="border:0; background: none; padding: 0 !important"><i class="material-icons" style="font-size: 16px; color: #9B01BA;">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
-          $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
-         $button .= '&nbsp;&nbsp;';
-          $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">https</i></button>';
+          $button .= '<a target="_blank" style="border:0; background: none; padding: 0 !important" href="' . url('admin/customerprofile', $data->id) . '" class="btn-sm" title="See Preview"><i class="material-icons " style="font-size: 16px; color: #16A66C;">remove_red_eye</i></a>';
+        //  $button .= '&nbsp;&nbsp;';
+        //   $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm "><i class="material-icons ">https</i></button>';
           return $button;
         })
         ->addColumn('status', function($data){
@@ -50,7 +54,9 @@ class CustomerController extends Controller
         $button = '<button type="button" title="Update Status" class=" btn-sm Notapproved" rid="'.$data->id.'"><i class="material-icons">block</i> </button>';
         return $button;
     }})
+    
       ->addColumn('monthlyrent' ,function($data){
+       
         return $data->bill[0]->monthlyrent;
     })  
         ->addColumn('due' ,function($data){
@@ -82,6 +88,7 @@ class CustomerController extends Controller
     })
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])
+        
         ->make(true);
     }
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
@@ -91,7 +98,7 @@ class CustomerController extends Controller
   public function pendingcustomer(Request $request)
   {
     if (request()->ajax()) {
-      return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2)->latest())
+      return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2))
         ->addColumn('action', function ($data) {
           $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
           $button .= '&nbsp;&nbsp;';
@@ -99,8 +106,8 @@ class CustomerController extends Controller
           $button .= '&nbsp;&nbsp;';
           $button .= '<a target="_blank" href="' . url('admin/customerprofile', $data->id) . '" class="invoice-action-view" title="See Preview"><i class="material-icons ">remove_red_eye</i></a>';
 
-          $button .= '&nbsp;&nbsp;';
-          $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">https</i></button>';
+          // $button .= '&nbsp;&nbsp;';
+          // $button .= '<button type="button" title="Inactive Customer"  id="deleteBtn" rid="' . $data->id . '" class="invoice-action-view btn-sm"><i class="material-icons ">https</i></button>';
           return $button;
         })
         ->addColumn('status', function($data){
@@ -339,12 +346,18 @@ class CustomerController extends Controller
     ));
 
     if ($customerinfo) {
-     
+     if($request->status==1){
       Toastr::success("Customer Create Successfully", "Well Done");
       return Redirect::to('admin/customerlist');
+     }
+     else{
+      Toastr::success("Customer Create Successfully", "Well Done");
+      return Redirect::to('admin/pendingcustomerlist');
+     }
+      
     } else {
       Toastr::warning("Customer Create Fail", "Sorry");
-      return Redirect::to('admin/createmerchant');
+      return Redirect::to('admin/customerlist');
     }
   }
 
@@ -423,6 +436,8 @@ class CustomerController extends Controller
     } else {
       $infoname = 'not-found.jpg';
     };
+    if($request->oldpassword==null){
+     $password=$customer->password;
     $this->validate($request, [
       'customername' => 'required|min:3|max:190',
       'customermobile' => 'required|min:10|max:30',
@@ -437,11 +452,30 @@ class CustomerController extends Controller
       
 
     ]);
-    
+  }
+  else{
+    $this->validate($request, [
+      'customername' => 'required|min:3|max:190',
+      'customermobile' => 'required|min:10|max:30',
+      'houseno' => 'required|min:1|max:160',
+      'floor' => 'required|min:1|max:160',
+      'district_id' => 'required',
+      'thana_id' => 'required',
+      'area_id' => 'required',
+      'package_id' => 'required',
+       'monthlyrent' => 'required',
+       'loginid' => 'required|min:3|max:60|unique:customers,loginid,'.$id,
+       'oldpassword' => 'required',
+       'repassword' => 'required|same:oldpassword',
+
+    ]);
+    $password=Hash::make($request->oldpassword);
+  }
     $info = Customer::whereadmin_id(Auth::id())->find($id)->update(array(
       'customername' => $request->customername,
       'contactperson' => $request->contactperson,
       'email' => $request->email,
+      'password' =>  $password,
       'loginid' =>  $request->loginid,
      'customermobile' => $request->customermobile,
       'customeraltmobile' => $request->customeraltmobile,
@@ -500,8 +534,16 @@ class CustomerController extends Controller
       'infoimage' => $infoname,
     ));
     if ($info) {
-      Toastr::success("Customer Update Successfully", "Well Done");
-      return Redirect::to('admin/customerlist');
+      if($request->status==1){
+        Toastr::success("Customer Update Successfully", "Well Done");
+        return Redirect::to('admin/customerlist');
+       }
+       else{
+        Toastr::success("Customer Update Successfully", "Well Done");
+        return Redirect::to('admin/pendingcustomerlist');
+       }
+     
+     
     } else {
       Toastr::warning("Customer Create Fail", "Sorry");
       return Redirect::to('admin/customerlist');
@@ -522,7 +564,6 @@ class CustomerController extends Controller
     return response()->json([
       'suceess'=>true,
     'info'=>$info,
-   
     'customer'=>$customer,
     ],201);
    
@@ -573,8 +614,8 @@ class CustomerController extends Controller
     }
     if($request->action=="deny"){
         $roomapproval->status=1;
-        $smsinfo=['name'=>$roomapproval->customername,'mobile'=>$roomapproval->customermobile,'id'=>$roomapproval->loginid,'monthlypayment'=>$roomapproval->monthlyrent];
-        CommonFx::sentsmscustomer($smsinfo);
+        $smsinfo=['name'=>$roomapproval->customername,'mobile'=>$roomapproval->customermobile,'id'=>$roomapproval->loginid,'ip'=>$roomapproval->ip,'oppusername'=>$roomapproval->secretname,'opppassword'=>$roomapproval->scrtnamepass,'monthlypayment'=>$roomapproval->monthlyrent];
+         CommonFx::sentsmscustomer($smsinfo);
 
     }
         $roomapproval->update();
@@ -585,6 +626,35 @@ class CustomerController extends Controller
 
 
 } 
+public function sendsmscustomer(Request $request){
+  $customers=Customer::whereadmin_id(Auth::id())->wherestatus(2)->get();
+foreach($customers as $customer){
+
+$data = [
+  'admin_id'=>Auth::id(),
+  'message' =>$request->smsmessage,
+  'name'=>$customer->customername,
+  'number'=>$customer->customermobile,
+  'id'=>$customer->loginid,
+  'ip'=>$customer->ip,
+  'opppassword'=>$customer->opppasswordip,
+  'oppusername'=>$customer->oppusername,
+  'companyname'=>Auth::user()->company,
+  'companynumber'=>Auth::user()->phone,
+  'billamount'=>$customer->total,
+  'expeirydate'=>$customer->atd_day,
+  'exmonth'=>$customer->atd_month
+ 
+];
+
+Sendcustomersms::dispatch($data);
+}
+
+ return response()->json(['success' => true]);
+
+  }
+
+
 
   }
 

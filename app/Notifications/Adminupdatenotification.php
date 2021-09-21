@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Queue\SerializesModels;
 class Adminupdatenotification extends Notification implements ShouldQueue
@@ -32,7 +31,7 @@ class Adminupdatenotification extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-           'data' => $this->data['message']
+           'data' => $this->data['admindata']
         ];
     }
 }

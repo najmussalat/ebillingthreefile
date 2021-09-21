@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Models;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Customer extends Model
 {
-	use SoftDeletes;
+	use SoftDeletes, Notifiable;
 	protected $fillable=[
 	'loginid',
 	'customername',
@@ -102,6 +104,11 @@ public function area()
 
 public function bill()
 {
-	return $this->hasMany('App\Models\Bill');
+	return $this->hasMany('App\Models\Bill')->whereMonth('created_at', date('m'))
+	->whereYear('created_at', date('Y'));
+}
+public function complain()
+{
+	return $this->hasMany('App\Models\Complain');
 }
 }

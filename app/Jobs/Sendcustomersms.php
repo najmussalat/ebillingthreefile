@@ -28,10 +28,10 @@ protected $data;
     public function handle()
     {
         $smssetting=Smssent::whereadmin_id($this->data['admin_id'])->firstOrFail();
-       
+        if(($smssetting->problem==1) && ($smssetting->blance>1)){
         $text= str_replace(['#CUSTOMER_NAME#','#CUSTOMER_ID#','#IP#', '#PPPOE_USERNAME#','#COMPANY_NAME#','#COMPANY_MOBILE#','#MONTH#','#BILL_AMOUNT#','#LAST_DAY_OF_PAY_BILL#'], [$this->data['name'], $this->data['id'],$this->data['ip'],$this->data['oppusername'],$this->data['companyname'],$this->data['companynumber'],$this->data['expeirydate'],$this->data['billamount'],$this->data['exmonth']], $this->data['message']);
     
-        if($smssetting->blance>1){
+       
             $number=$this->data['number'];
            $dataall= array(
              'username'=>$smssetting->username,

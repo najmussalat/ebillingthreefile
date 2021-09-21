@@ -1,0 +1,94 @@
+{
+    "menu": [{
+            "url": "javascript:void(0)",
+            "name": "Customer",
+            "i18n": "Customer",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "customer",
+            "icon": "dashboard",
+
+            "submenu": [{
+                    "url": "user/customerlist",
+                    "name": "Customer List",
+                    "i18n": "Customer List",
+                    "slug": "user/customerlist"
+                },
+                {
+                    "url": "user/pendingcustomerlist",
+                    "name": "Pending Customer List",
+                    "i18n": "Pending Customer List",
+                    "slug": "user/pendingcustomerlist"
+                },
+                {
+                    "url": "user/createcustomer",
+                    "name": "Create Customer",
+                    "i18n": "Create Customser",
+                    "slug": "user/createcustomer"
+                },
+                {
+                    "url": "user/inactivecustomer",
+                    "name": "Inactive Customer",
+                    "i18n": "Inactive Customser",
+                    "slug": "user/inactivecustomer"
+                }
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Collection",
+            "i18n": "Collection",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "collection",
+            "icon": "filter_vintage",
+
+            "submenu": [{
+                    "url": "user/collection",
+                    "name": "Collection Search",
+                    "i18n": "Collection Search",
+                    "slug": "user-collection"
+                },
+                {
+                    "url": "user/createcollection",
+                    "name": "Create Collection",
+                    "i18n": "Create Collection",
+                    "slug": "createcollection"
+                },
+                {
+                    "url": "user/cancelcollection",
+                    "name": "Cancel Collection",
+                    "i18n": "Cancel Collection",
+                    "slug": "cancelcollection"
+                }
+
+
+            ]
+
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Print",
+            "i18n": "Print",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "print",
+            "icon": "print",
+            "submenu": [{
+                "url": "user/monthlyprint",
+                "name": "Monthly Print",
+                "i18n": "Monthly Print",
+                "slug": "user/monthlyprint"
+                },
+                {
+                    "url": "user/printlocationwise",
+                    "name": "Print Locationwise",
+                    "i18n": "Print Locationwise",
+                    "slug": "user/printlocationwise"
+                }
+
+            ]
+        }
+       
+
+
+
+    ]
+}

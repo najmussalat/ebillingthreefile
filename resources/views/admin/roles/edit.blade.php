@@ -1,115 +1,80 @@
-@extends('layouts.superadmin')
-@section('superadmin')
-@section('title','Role')
+
+@extends('layouts.adminMaster')
+
+@section('content')
+@section('title', "Edit Role")
 @include('partial.formerror')
-<hr>
-
-
-<div class="row">
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <h2 class="text-center">Edit Role</h2>
-        <a class="btn btn-primary" href="{{ route('role.index') }}"> Back</a>
-        <div class="form-group">
-            {!! Form::model($role, ['method' => 'PATCH','route' => ['role.update', $role->id]]) !!}
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-
-        </div>
-
-    </div>
-    <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-          
-          <div class="x_content">
-            <!--style="width:50%";-->
-            <table  class="table table-striped table-hover">
-              <thead>
-                <tr>
-                   <th>Permission Name</th>
-                 <th><a rel="group_1" href="#invert_selection">All Selection</a> </th>
+                            <!-- Form Advance -->
+                            <div class="col s12 m12 l12">
+                               
+                                <div id="Form-advance" class="card card card-default scrollspy">
+                                    <div class="card-content">
+                                        <h4 class="card-title">Role Update Form</h4>
+                                     
+                                       
+                                        {!! Form::model($role, array('url' =>['admin/updateaccountrole/'.$role->id], 'method'=>'PUT','files'=>true)) !!}
                                  
-                </tr>
-              </thead>
-      
-      
-              <tbody>
-                @if(count($permission)>0)
-                @foreach($permission as $value)
-                     
-                <tr>
-                 <td>{{ $value->name }}</td>
-                 <td id="group_1">  <div class="pretty p-icon p-round p-pulse">
-                    {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
-                        <div class="state p-success">
-                            <i class="icon mdi mdi-check"></i>
-                            <label>Allow</label>
+                                        <div class="row">
+                                            <div class="input-field col m12 s12">
+                                                {!!Form::text('name',null, array('id'=>'name','required'))!!}
+                                        
+                                                {!!Form::label('name',' * Permission Name')!!}
+                                                <div class="col s12">
+                                                    <table  class="table table-striped table-hover">
+                                                        <thead>
+                                                          <tr>
+                                                             <th>Permission Name</th>
+                                                           <th><a rel="check" href="#invert_selection">All Selection/Un Select</a> </th>
+                                                          
+                                                                   {{-- {{dd($rolePermissions)   }}      --}}
+                                                          </tr>
+                                                        </thead>
+                                                
+                                          
+                                                        <tbody>
+                                                          @if(count($permission)>0)
+                                                          @foreach($permission as $value)
+                                                               
+                                                          <tr>
+                                                           <td>{{ $value->name }}</td>
+                                                          
+                                                           
+                                                         <td id="check"> <label>
+                                                        
+                                                            {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'filled-in')) }}
+                                                            <span>Click</span>
+                                                          </label></td>
+                                                          </tr>
+                                                          @endforeach
+                                                          @else
+                                                         <h3 class="text-danger">No Barcode found</h3>
+                                                         @endif
+                                                                    
+                                                        </tbody>
+                                                      </table>
+                                                    <!-- </div> -->
+                                                  </div>
+                                                 
+                                            </div>
+                                              
+                                            </div>
+                                              
+                                          
+                                        
+                                        
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Update
+                                                            <i class="material-icons right">send</i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                     {!! Form::close() !!}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div></td>
-                 
-               
-                </tr>
-                @endforeach
-                @else
-               <h3 class="text-danger">No Permission found</h3>
-               @endif
-                          
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      
-
-
-
-   
-
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-
-        <button type="submit" class="btn btn-warning">Update</button>
-
-    </div>
-
-</div>
-
-{!! Form::close() !!}
-       
-       
-
-
+                           
+                            </div>
 @endsection
-
-@section('script')
-
-{{-- <script>
-$(document).ready( function () {
-    $('#myTable').DataTable();
-} );
-</script> --}}
-
-<script type="text/javascript">
-    $(document).ready( function() {
-        // Select all
-        $("A[href='#select_all']").click( function() {
-            $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").attr('checked', true);
-            return false;
-        });
-        // Select none
-        $("A[href='#select_none']").click( function() {
-            $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").attr('checked', false);
-            return false;
-        });
-        // Invert selection
-        $("A[href='#invert_selection']").click( function() {
-            $("#" + $(this).attr('rel') + " INPUT[type='checkbox']").each( function() {
-                $(this).attr('checked', !$(this).attr('checked'));
-            });
-            return false;
-        });
-    });
-</script>
-    
-@endsection
-
-

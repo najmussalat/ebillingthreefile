@@ -86,7 +86,60 @@
 
             ]
         },
-       
+        {
+            "url": "javascript:void(0)",
+            "name": "Buy SMS",
+            "i18n": "Buy SMS",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "sms",
+            "icon": "sms",
+            "submenu": [{
+                    "url": "admin/buysmslist",
+                    "name": "SMS List",
+                    "i18n": "SMS List",
+                    "slug": "admin/buysmslist"
+                },
+                {
+                    "url": "admin/createbuysms",
+                    "name": "SMS Create",
+                    "i18n": "SMS Create",
+                    "slug": "admin/createbuysms"
+                }
+                
+                
+
+            ]
+        }, 
+         {
+            "url": "javascript:void(0)",
+            "name": "Complain",
+            "i18n": "Complain",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "complain",
+            "icon": "compare_arrows",
+            "submenu": [{
+                    "url": "admin/complainlist",
+                    "name": "Complain List",
+                    "i18n": "Complain List",
+                    "slug": "admin/complainlist"
+                },
+                {
+                    "url": "admin/createcomplain",
+                    "name": "Create Complain",
+                    "i18n": "Create Complain",
+                    "slug": "admin/createcomplain"
+                },
+                {
+                    "url": "admin/complainsetting",
+                    "name": "Complain Setting",
+                    "i18n": "Complain Setting",
+                    "slug": "admin/complainsetting"
+                }
+                
+                
+
+            ]
+        },
         {
             "url": "javascript:void(0)",
             "name": "Setting",
@@ -160,6 +213,42 @@
                     "slug": "admin/printsetting"
                 }
 
+
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "User",
+            "i18n": "User",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "user",
+            "icon": "verified_user",
+            "submenu": [{
+                    "url": "admin/userlist",
+                    "name": "User List",
+                    "i18n": "User List",
+                    "slug": "admin/userlist"
+                },
+                {
+                    "url": "admin/createuser",
+                    "name": "Create User",
+                    "i18n": "Create User",
+                    "slug": "admin/createuser"
+                },
+                {
+                    "url": "admin/accountrolelist",
+                    "name": "Role List",
+                    "i18n": "Role List",
+                    "slug": "admin-accountrolelist"
+                },
+                
+                {
+                    "url": "admin/createaccountrole",
+                    "name": "Create Role",
+                    "i18n": "Create Role",
+                    "slug": "admin-createaccountrole"
+                }
+                
 
             ]
         }

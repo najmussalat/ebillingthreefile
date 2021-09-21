@@ -1,10 +1,11 @@
 <?php
 
 namespace App\Observers;
+use App\Models\Bill;
 use App\Models\Customer;
 use App\Helpers\CommonFx;
-use App\Models\Bill;
 use App\Models\Collection;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CustomerObserver
 {
@@ -30,7 +31,7 @@ class CustomerObserver
                  'user_id' => $customer->user_id?:0
               
             ]);
-            $smsinfo=['name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'monthlypayment'=>$customer->monthlyrent];
+            $smsinfo=['name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'ip'=>$customer->ip,'oppusername'=>$customer->secretname,'opppassword'=>$customer->scrtnamepass,'monthlypayment'=>$customer->monthlyrent];
             CommonFx::sentsmscustomer($smsinfo);
          }
          else{

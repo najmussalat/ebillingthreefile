@@ -24,6 +24,20 @@
                                         
                                         </div>
                                        
+<div class="row">
+    <div class="input-field col m6 s12">
+        {!! Form::text('oldpassword', null, ['id' => 'loginpass', '']) !!}
+        {!! Form::label('loginpass', ' * Login Password') !!}
+
+    </div>
+
+    <div class="input-field col m6 s12">
+        {!! Form::text('repassword', null, ['id' => 'logtrtypepass', '']) !!}
+        {!! Form::label('logtrtypepass', '* Retype password') !!}
+
+    </div>
+
+</div>
                                         
                                         <div class="row">
                                             <div class="input-field col m6 s12">
@@ -150,10 +164,41 @@
                                         </div>
                                         
                                         <div class="row">
-                                            <div class="input-field col m4 s12">
-                                                {!! Form::select('floor', ['L' => 'First', 'S' => 'Second'], null, ['id' => 'floor_id', 'required', 'class' => '']) !!}
-                                                {!! Form::label('floor', 'Floor *') !!}
-                                            </div>
+                                            
+                                                <div class="input-field col m4 s12">
+                                                    {!! Form::select('floor', [ 'Ground Floor' => 'Ground Floor',
+                                                    '1st Floor' => '1st Floor',
+                                                    '2nd Floor' => '2nd Floor',
+                                                    '3rd Floor' => '3rd Floor',
+                                                    '4th Floor' => '4th Floor',
+                                                    '5th Floor' => '5th Floor',
+                                                    '6th Floor' => '6th Floor',
+                                                    '7th Floor' => '7th Floor',
+                                                    '8th Floor' => '8th Floor',
+                                                    '9th Floor' => '9th Floor',
+                                                    '10th Floor' => '10th Floor',
+                                                    '11th Floor' => '11th Floor',
+                                                    '12th Floor' => '12th Floor',
+                                                    '13th Floor' => '13th Floor',
+                                                    '14th Floor' => '15th Floor',
+                                                    '16th Floor' => '16th Floor',
+                                                    '17th Floor' => '17th Floor',
+                                                    '18th Floor' => '18th Floor',
+                                                    '19th Floor' => '19th Floor',
+                                                    '20th Floor' => '20th Floor',
+                                                    '21th Floor' => '21th Floor',
+                                                    '22th Floor' => '22th Floor',
+                                                    '23th Floor' => '23th Floor',
+                                                    '24th Floor' => '24th Floor',
+                                                    '25th Floor' => '25th Floor',
+                                                    '26th Floor' => '26th Floor',
+                                                    '27th Floor' => '27th Floor',
+                                                    '28th Floor' => '28th Floor',
+                                                    '29th Floor' => '29th Floor',
+                                                    '30th Floor' => '30th Floor'], null, ['id' => 'floor_id', 'required', 'class' => '']) !!}
+                                                    {!! Form::label('floor', 'Floor *') !!}
+                                                </div>
+                                               
                                             <div class="input-field col m4 s12">
                                                 {!! Form::text('post', null, ['id' => 'post']) !!}
                                                 {!! Form::label('post', 'Post') !!}
@@ -278,7 +323,13 @@
                                         
                                         <div class="row">
                                         <div class="input-field col m6 s12">
-                                        {!! Form::select('package_id', \App\Helpers\CommonFx::Packageame(), null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!}
+                                        {{-- {!! Form::select('package_id', \App\Helpers\CommonFx::Packageame(), null, ['id' => 'package_id', 'placeholder' => 'Select One']) !!} --}}
+                                        
+                                        <select name="package_id" id="package_id" placeholder="Select One">
+                                        @foreach (CommonFx::Packageame() as  $value)
+                                            <option value="{{$value->id}}" {{ ( $value->id == $info->package_id) ? 'selected' : ''}}>{{$value->packagename}} &nbsp; &nbsp; {{$value->packageprice}}</option>
+                                        @endforeach
+                                        </select>
                                         {!! Form::label('package_id', '* Package') !!}
                                         </div>
                                         
@@ -405,7 +456,22 @@
                                         
                                         <div class="row">
                                         <div class="input-field col m6 s12">
-                                        {!! Form::select('clienttype_id', ['L' => 'Bangladesh', 'S' => 'India'], null, ['id' => 'clienttype_id', 'class' => '']) !!}
+                                        {!! Form::select('clienttype_id',  [ 'Home' => 'Home',
+                                        'Corporate' => 'Corporate',
+                                        'BWA' => '2nd Floor',
+                                        '3rd Floor' => 'BWA',
+                                        'Category-A' => 'Category-A',
+                                        'Category-B' => 'Category-C',
+                                        'Category-C' => 'Category-C',
+                                        'ICX' => 'ICX',
+                                        'IGW' => 'IGW',
+                                        'IIG' => 'IIG',
+                                        'ILDC' => 'ILDC',
+                                        'ISP-Central Zone' => 'ISP-Central Zone',
+                                        'ISP-Nationwide' => 'ISP-Nationwide',
+                                        'ISP-Zonal' => 'ISP-Zonal',
+                                        'NTTN' => 'NTTN'
+                                        ], null, ['id' => 'clienttype_id', 'class' => '']) !!}
                                         {!! Form::label('clienttype_id', 'Type of Client') !!}
                                         </div>
                                         
@@ -437,7 +503,7 @@
                                         </div>
                                         <div class="row">
                                         <div class="input-field col m4 s12">
-                                        {!! Form::select('connectedby', ['{{Auth::id}}' => Auth::user()->name], null, ['id' => 'connectedby', 'class' => '']) !!}
+                                        {!! Form::select('connectedby', CommonFx::Connect(), null, ['id' => 'connectedby', 'placeholder' => 'Select Employee']) !!}
                                         {!! Form::label('connectedby', 'Connected By') !!}
                                         </div>
                                         

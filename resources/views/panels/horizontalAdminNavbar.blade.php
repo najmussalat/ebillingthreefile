@@ -5,7 +5,7 @@
       <ul class="left">
         <li>
           <h1 class="logo-wrapper">
-            <a class="brand-logo darken-1" href="{{asset('/')}}">
+            <a class="brand-logo darken-1" href="{{url('/admin/dashboard')}}">
               <img src="{{asset($configData['smallScreenLogo'])}}" alt="materialize logo">
               <span class="logo-text hide-on-med-and-down">
                 @if(!empty ($configData['templateTitle']))

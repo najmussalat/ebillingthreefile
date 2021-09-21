@@ -53,7 +53,7 @@ class Billgenerate extends Command
            'total' => $customer->total
           
         ]);
-        $smsinfo=['adminid'=>$customer->admin_id,'name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'expeirydate'=>$customer->atd_month];
+        $smsinfo=['adminid'=>$customer->admin_id,'name'=>$customer->customername,'mobile'=>$customer->customermobile,'id'=>$customer->loginid,'billamount'=>$customer->total,'expeirydate'=>$customer->atd_month];
         CommonFx::sentsmsbillcreate($smsinfo);      
             
         }

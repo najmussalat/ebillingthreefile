@@ -39,116 +39,71 @@
         },
         {
             "url": "javascript:void(0)",
-            "name": "Disease",
-            "i18n": "Disease",
+            "name": "Payment",
+            "i18n": "Payment",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "disease",
-            "icon": "dashboard",
+            "slug": "payment",
+            "icon": "payment",
 
 
             "submenu": [{
-                    "url": "superadmin/diseaselist",
-                    "name": "Disease List",
-                    "i18n": "Disease List",
-                    "slug": "superadmin-diseaselist"
+                    "url": "superadmin/paymentlist",
+                    "name": "Payment List",
+                    "i18n": "Payment List",
+                    "slug": "payment"
                 },
                 {
-                    "url": "superadmin/createdisease",
-                    "name": "Create Disease",
-                    "i18n": "Create Disease",
-                    "slug": "createdisease"
+                    "url": "superadmin/createpayment",
+                    "name": "Create Payment",
+                    "i18n": "Create Payment",
+                    "slug": "createpayment"
                 }
 
             ]
         },
         {
             "url": "javascript:void(0)",
-            "name": "Medicines",
-            "i18n": "Medicines",
+            "name": "SMS",
+            "i18n": "SMS",
             "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "medicines",
-            "icon": "pages",
+            "slug": "sms",
+            "icon": "sms",
             "submenu": [{
-                    "url": "superadmin/medicinelist",
-                    "name": "Medicines List",
-                    "i18n": "Medicines List",
-                    "slug": "superadmin/medicinelist"
+                    "url": "superadmin/smssettinglist",
+                    "name": "SMS Setting List",
+                    "i18n": "SMS Setting List",
+                    "slug": "superadmin/smssettinglist"
                 },
                 {
-                    "url": "superadmin/createmedicinelist",
-                    "name": "Create Medicine",
-                    "i18n": "Create Medicine",
-                    "slug": "superadmin/createmedicinelist"
+                    "url": "superadmin/smstypelist",
+                    "name": "SMS Type List",
+                    "i18n": "SMS Type List",
+                    "slug": "superadmin/smstypelist"
+                },
+                {
+                    "url": "superadmin/createsmstype",
+                    "name": "Create SMS Type",
+                    "i18n": "Create SMS Type",
+                    "slug": "superadmin/createsmstype"
+                },
+                {
+                    "url": "superadmin/salesmslist",
+                    "name": "Sale SMS List",
+                    "i18n": "Sale SMS List",
+                    "slug": "superadmin/salesmslist"
+                },
+                {
+                    "url": "superadmin/createsalesms",
+                    "name": "Custom SMS Sale",
+                    "i18n": "Custom SMS Type",
+                    "slug": "superadmin/createsalesms"
                 }
+                
+                
 
             ]
         },
-        {
-            "url": "javascript:void(0)",
-            "name": "DiseaseMedicines",
-            "i18n": "DiseaseMedicines",
-            "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "diseasemedicines",
-            "icon": "pages",
-            "submenu": [{
-                    "url": "superadmin/disemedicinelist",
-                    "name": "DiseaseMedicines List",
-                    "i18n": "DiseaseMedicines List",
-                    "slug": "superadmin/disemedicinelist"
-                },
-                {
-                    "url": "superadmin/createdisemedicinelist",
-                    "name": "Create DiseaseMedicines",
-                    "i18n": "Create DiseaseMedicines",
-                    "slug": "superadmin/createdisemedicinelist"
-                }
-
-            ]
-        },
-        {
-            "url": "javascript:void(0)",
-            "name": "Medicineinfo",
-            "i18n": "Medicineinfo",
-            "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "medicineinformation",
-            "icon": "pages",
-            "submenu": [{
-                    "url": "superadmin/medicineinformationlist",
-                    "name": "Medicineinfo List",
-                    "i18n": "Medicineinfo List",
-                    "slug": "superadmin/medicineinformationlist"
-                },
-                {
-                    "url": "superadmin/createdisemedicinelist",
-                    "name": "Create Medicineinfo",
-                    "i18n": "Create Medicineinfo",
-                    "slug": "superadmin/createedicineinformation"
-                }
-
-            ]
-        },
-        {
-            "url": "javascript:void(0)",
-            "name": "Blog",
-            "i18n": "Blog",
-            "class": "collapsible-header waves-effect waves-cyan",
-            "slug": "blog",
-            "icon": "pages",
-            "submenu": [{
-                    "url": "superadmin/bloglist",
-                    "name": "Blog List",
-                    "i18n": "Blog List",
-                    "slug": "superadmin/bloglist"
-                },
-                {
-                    "url": "superadmin/createblog",
-                    "name": "Create Blog",
-                    "i18n": "Create Blog",
-                    "slug": "superadmin/createblog"
-                }
-
-            ]
-        },
+        
         {
             "url": "javascript:void(0)",
             "name": "Contact",

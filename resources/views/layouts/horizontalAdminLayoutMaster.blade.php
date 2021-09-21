@@ -2,21 +2,6 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
- <style>
-.preloader {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 9999;
-background-image: url('{{asset('den/storage/app/files/shares/backend/preloader.gif')}}');
-background-repeat: no-repeat; 
-background-color: #FFF;
-background-position: center;
-}
- </style>
-
 <body
   class="{{$configData['mainLayoutTypeClass']}} @if(!empty($configData['bodyCustomClass']) && isset($configData['bodyCustomClass'])) {{$configData['bodyCustomClass']}} @endif @if($configData['isMenuCollapsed'] && isset($configData['isMenuCollapsed'])){{'menu-collapse'}} @endif"
   data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">

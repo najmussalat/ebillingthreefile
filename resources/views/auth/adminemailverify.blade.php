@@ -41,8 +41,8 @@
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">person_outline</i>
-          <input  type="number"  name="code" class="form-control 
-           required  autofocus value="{{ @Request::segment(4) }}>
+          <input  type="number"  name="code" class="form-control" 
+           required  autofocus value="{{ @Request::segment(4) }}" id="code" >
           <label for="code" class="center-align">Code</label>
           <input type="hidden" name="email" value="{{ Request::segment(3) }}">
         </div>

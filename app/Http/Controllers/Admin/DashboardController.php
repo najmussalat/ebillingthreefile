@@ -8,6 +8,9 @@ use App\Models\Contact;
 use Illuminate\Http\Request;
 use App\Models\Medicineinformation;
 use App\Http\Controllers\Controller;
+use App\Models\Complain;
+use App\Models\Customer;
+use App\Models\Smssent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
@@ -23,22 +26,17 @@ class DashboardController extends Controller
        
         $pageConfigs = ['navbarLarge' => false];
 
-            $admin= Admin::whereid(Auth::id())->select('id','status')->get(); 
-      
+           
             $user=User::whereadmin_id(Auth::id())->select('admin_id','id','status')->get(); 
        
       
         $contact= Contact::whereadmin_id(Auth::id())->select('admin_id','id','status')->get();
+        $smsinfo= Smssent::whereadmin_id(Auth::id())->select('admin_id','id','blance','smsrate')->first();
+        $customer= Customer::whereadmin_id(Auth::id())->select('admin_id','id','status')->get();
+        $complain= Complain::whereadmin_id(Auth::id())->select('admin_id','id','status')->get();
      
 
-       
-     
-       
-    
-  
-   
-
-       return view('admin.dashboard',['pageConfigs' => $pageConfigs], compact('admin','user','contact'));
+       return view('admin.dashboard',['pageConfigs' => $pageConfigs], compact('user','contact','smsinfo','customer','complain'));
     }
 
     /**

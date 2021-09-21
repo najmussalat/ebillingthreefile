@@ -212,10 +212,7 @@ class CollectionController extends Controller
 
       public function searchsinglecustomer(Request $request){
         if(! $request->id==null){
-        $searchvalue = Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::id())->whereHas('bill', function (Builder $query) {
-          $query->whereMonth('created_at', date('m'))
-        ->whereYear('created_at', date('Y'));
-        })->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
+        $searchvalue = Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::id())->Where('loginid','LIKE','%'.$request->id."%")->orwhere('customermobile','LIKE','%'.$request->id."%")->orwhere('customername','LIKE','%'.$request->id."%")->orwhere('secretname','LIKE','%'.$request->id."%")->first();
         
         if($searchvalue)
 {

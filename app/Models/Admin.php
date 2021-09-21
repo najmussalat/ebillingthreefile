@@ -4,12 +4,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\AdminResetPasswordNotification;
 class Admin extends Authenticatable implements MustVerifyEmail
 {
  use Notifiable;
-     use HasRoles;
+     
      use SoftDeletes;
      protected $guard = 'admin';
      protected $guard_name = 'superadmin';
@@ -28,9 +27,9 @@ class Admin extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Models\User');
     } 
    
-    public function blog()
+    public function complain()
     {
-        return $this->hasMany('App\Models\Blog')->select('admin_id','title','slug','metadescription','photo');
+        return $this->hasMany('App\Models\Complain');
     }
      public function medicineinformation()
     {
@@ -39,6 +38,14 @@ class Admin extends Authenticatable implements MustVerifyEmail
     public function collection()
     {
         return $this->hasMany('App\Models\Collection');
+    } 
+     public function smssent()
+    {
+        return $this->hasMany('App\Models\Smssent');
+    }
+    public function buysms()
+    {
+        return $this->hasMany('App\Models\Buysms');
     }
       protected $casts = [
         'email_verified_at' => 'datetime',
