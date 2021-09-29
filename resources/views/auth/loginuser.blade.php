@@ -19,7 +19,7 @@
                                                                 
                                                             @endif</h5>
                                                          
-                                                            <form  class="login-form"  method="POST" action="{{ route('login') }}" aria-label="{{ __('Login') }}">
+               <form  class="login-form"  method="POST" action="{{ route('user') }}" aria-label="{{ __('Login') }}">
                                                       
                          
                       @csrf

@@ -6,9 +6,10 @@ use Illuminate\Notifications\Notifiable;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-class Customer extends Model
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Customer extends  Authenticatable  
 {
+	protected $guard = 'customer';
 	use SoftDeletes, Notifiable;
 	protected $fillable=[
 	'loginid',
@@ -84,6 +85,10 @@ public static function boot()
        $model->loginid = IdGenerator::generate(['table' => 'customers','field'=>'loginid', 'length' => 8, 'prefix' =>'NAQW']);
     });
 }
+public function admin()
+{
+	return $this->belongsTo('App\Models\Admin');
+}
 public function package()
 {
 	return $this->belongsTo('App\Models\Package');
@@ -106,6 +111,10 @@ public function bill()
 {
 	return $this->hasMany('App\Models\Bill')->whereMonth('created_at', date('m'))
 	->whereYear('created_at', date('Y'));
+}
+public function bills()
+{
+	return $this->hasMany('App\Models\Bill');
 }
 public function complain()
 {

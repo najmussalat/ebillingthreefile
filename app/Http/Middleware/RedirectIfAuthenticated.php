@@ -26,6 +26,10 @@ class RedirectIfAuthenticated
              return redirect('superadmin/dashboard');
 
          }
+          if ($guard == "customer" && Auth::guard($guard)->check()) {
+             return redirect('customer/dashboard');
+
+         }
         
         if (Auth::guard($guard)->check()) {
             return redirect('/admin/dashboard');

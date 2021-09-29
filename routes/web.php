@@ -7,8 +7,8 @@ use App\Http\Controllers\LanguageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
-Route::get('/testview', function () {
-        return view('test.index');
+Route::get('/', function () {
+       return view('welcome');
     }
 
 );
@@ -29,7 +29,7 @@ Route::get('/blog.xml', 'SitemapController@blog');
 Route::get('/homeoinfo.xml', 'SitemapController@homeoinfo');
 Route::get('/disease.xml', 'SitemapController@disease');
 
-Route::get('/', 'Auth\LoginController@showAdminLoginForm');
+// Route::get('/', 'Auth\LoginController@showAdminLoginForm');
 Route::get('/login/user', 'Auth\LoginController@showAdminLoginForm');
 Auth::routes(['verify'=> true]);
 Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
@@ -46,6 +46,10 @@ Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 Route::get('/login/user', 'Auth\LoginController@showLoginuserForm');
 Route::post('/login/superadmin', 'Auth\LoginController@superadminLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin');
+
+
+
+
 
 Route::prefix('admin')->group(function () {
 
@@ -83,6 +87,8 @@ Route::group([ 'prefix'=>'superadmin',
 
     ], function() {
         Route::get('dashboard', 'DashboardController@index');
+        Route::get('importcustomer', 'DashboardController@impotercustomer');
+        Route::post('impotercustomer', 'DashboardController@customerimporter');
         Route::post('deletenotification', 'DashboardController@deletenotification');
         Route::post('seennotification', 'DashboardController@seennotification');
   //AccountPermission Start
@@ -242,6 +248,30 @@ Route::post('replyemail','ContactController@store');
 
 //Contact  End
 
+
+
+//Customer Start
+Route::get('customerlist','CustomerController@index');
+Route::get('pendingcustomerlist','CustomerController@pendingcustomer');
+Route::get('createcustomer','CustomerController@create');
+Route::post('createcustomer','CustomerController@store');
+Route::get('editcustomer/{id}','CustomerController@edit');
+Route::get('customerprofile/{id}','CustomerController@show');
+ Route::patch('updatecustomer/{id}','CustomerController@update');
+ Route::delete('deletecustomer/{id}','CustomerController@destroy');
+Route::post('customerstatus', 'CustomerController@setapproval');
+Route::post('searchcustomer', 'CustomerController@searchmedicine');
+Route::get('findbill/{id}','CustomerController@findbill');
+Route::post('updatebillcustomer','CustomerController@updatebillcustomer');
+Route::get('inactivecustomer','CustomerController@inactivecustomer');
+Route::get('inactivecustomerfind','CustomerController@findinactivecustomer');
+Route::get('restorecustomer/{id}','CustomerController@restorecustomer');
+Route::post('sendsmscustomer','CustomerController@sendsmscustomer');
+//Customer  End
+
+
+
+
     }
 
 );
@@ -260,7 +290,8 @@ Route::group([ 'prefix'=>'admin',
         Route::post('updateprofilephoto', 'AdminController@updateprofilephoto');
         Route::patch('updateprofileinfo/{id}', 'AdminController@updateprofileinfo');
         Route::post('updatepassword', 'AdminController@updatepassword');
-       
+        Route::get('customerexcelform', 'DashboardController@customerexcel');
+        Route::post('makecusomerexcel', 'DashboardController@makecusomerexcelform');
 //area list
 
 Route::get('arealist','AreaController@index');
@@ -420,6 +451,21 @@ Route::get('downloadesmsinvoice/{id}','PdfController@buysmsinvoice');
 Route::group([ 'prefix'=>'user',
     'namespace'=>'User',
     'middleware'=> 'auth',
+   
+
+    ], function() {
+        Route::get('dashboard', 'DashboardController@index');
+       
+       
+    }
+);
+
+Route::post('/login/customer', 'Auth\LoginController@customerLogin');
+Route::get('/login/customer', 'Auth\LoginController@showLogincustomerForm');
+
+Route::group([ 'prefix'=>'customer',
+    'namespace'=>'Customer',
+    'middleware'=> 'auth:customer',
    
 
     ], function() {

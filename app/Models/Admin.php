@@ -39,6 +39,10 @@ class Admin extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany('App\Models\Collection');
     } 
+      public function customer()
+    {
+        return $this->hasMany('App\Models\Customer');
+    } 
      public function smssent()
     {
         return $this->hasMany('App\Models\Smssent');

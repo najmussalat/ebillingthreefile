@@ -141,9 +141,9 @@ $(document).ready(function () {
            $('#userid').append('<span>' + data.result.loginid + '</span>');
             $('#name').append('<span>' + data.result.customername + '</span>');
             $('#ppusername').append('<span>' + data.result.secretname + '</span>');
-            $('#adress').append('<span> House No # '+ data.result.houseno + ','+ data.result.floor + ','  + data.result.district.district + ',' +
-                            data.result.thana.thana + ',' + data.result.area.areaname +
-                            ',' + data.result.customermobile + '</span>');
+            $('#adress').append('<span> House No # '+ data.result.houseno + ', '+ data.result.floor + ', '  + data.result.district.district + ', ' +
+                            data.result.thana.thana + ', ' + data.result.area.areaname +
+                            ', ' + data.result.customermobile + '</span>');
                         $.each(data.result.bill[0].collection, function(key, newvalue){
                         $('#dt').append('<tr><>' + newvalue.updated_at + '</td><td>Collection By </br>' + newvalue.admin['name'] +' Paymenent method </br>' + newvalue.payby['paybyname'] + '</td><td>' + newvalue.paid + '</td><td><button id="Deletepay" paidval="'+newvalue.paid+'" rid="'+newvalue.id+'"><i class="material-icons">cancel</i></button></td></tr>'
                         );

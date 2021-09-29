@@ -1,16 +1,17 @@
 <?php
 namespace App\Http\Controllers\Superadmin;
-
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Contact;
-
-
 use Illuminate\Http\Request;
+use App\Imports\CustomerImport;
+use Kamaln7\Toastr\Facades\Toastr;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Contracts\Cache\Factory;
+use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
@@ -61,6 +62,21 @@ class DashboardController extends Controller
       return response()->json(['success'=>true],201);
         
         
+    }
+
+
+    public function impotercustomer(){
+
+        $pageConfigs = ['navbarLarge' => false];
+        
+        return view('superadmin.excel.customerimporter',['pageConfigs' => $pageConfigs]); 
+    }
+    public function customerimporter(Request $request){
+// dd($request->file('customers'));
+        Excel::import(new CustomerImport, request()->file('customers'));
+        Toastr::success("Importe Create Successfully", "Well Done");
+               return Redirect::to('superadmin/importcustomer'); 
+              
     }
 
 }

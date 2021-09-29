@@ -1,12 +1,6 @@
 
 
-      <div class="row">
-        <div class="input-field col s12">
-          <h5 class="ml-4">Register</h5>
-          <p class="ml-4">Join to our community now !</p>
-        </div>
-      </div>
-      <div class="row margin">
+            <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">accessibility</i>
           <input id="name" type="text" class="@error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"
@@ -45,14 +39,7 @@
           @enderror
         </div>
       </div> 
-         <div class="row margin">
-          <label for="roles" class="">Role *</label>
-        <div class="input-field col s12">
- 
-          {!!FORM::select('roles[]', $roles, null, array('required','id'=>'roles', 'class'=>'select2 browser-default','multiple'=>true))!!}     
-         
-        </div>
-      </div>
+    
       <div class="row margin">
         <div class="input-field col s12">
           <i class="material-icons prefix pt-2">mail_outline</i>
@@ -87,15 +74,5 @@
           <label for="password-confirm">Password again</label>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <button type="submit"
-            class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Register</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <p class="margin medium-small"><a href="{{ url('login/admin')}}">Already have an account? Login</a></p>
-        </div>
-      </div>
+      
     

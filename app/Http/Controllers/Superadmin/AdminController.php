@@ -48,8 +48,8 @@ class AdminController extends Controller
         ];
         $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
      
-        $roles = Role::pluck('name','name')->all();
-        return view('superadmin.createadmin.create',['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('roles',$roles);
+       
+        return view('superadmin.createadmin.create',['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs]);
     }
 
     /**
@@ -80,7 +80,6 @@ class AdminController extends Controller
           
     $userinfo =Admin::create(array(
         'superadmin_id' =>Auth::guard('superadmin')->user()->id,
-        'username' => CommonFx::make_slug($request->username),
         'name' => $request->name,
         'phone' => $request->phone,
         'image' => 'not-found.jpg',
@@ -92,7 +91,7 @@ class AdminController extends Controller
      
     ));
 
-    $userinfo->assignRole($request->input('roles'));  
+    
    $maildata = [  
             'name'=> $request->name,
             'message' => 'Homeobari Superadmin Want you as a Admin. Your Email '.$request->email.' Your Password '.$request->password. '<a class="black-text"  href="'. url('/login/admin') . '">Login Now</a>',
@@ -139,10 +138,10 @@ class AdminController extends Controller
         ];
       
         $pageConfigs = ['pageHeader' => true, 'isFabButton' => false];
-        $roles = Role::pluck('name','name')->all();
+      
         $admin = Admin::find($id);
-        $userRole = $admin->roles->pluck('name','name')->all();
-        return view('superadmin.createadmin.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('roles',$roles)->with('admin',$admin)->with('userRole',$userRole);
+      
+        return view('superadmin.createadmin.edit', ['pageConfigs' => $pageConfigs], ['breadcrumbs' => $breadcrumbs])->with('admin',$admin);
     }
 
     /**
@@ -154,32 +153,40 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-   
-    
+        $list =  Admin::find($id);
+        if($request->password==null){
+           $pass=$list->password;
         $this->validate($request,[
-            'username' => 'required|min:3|unique:admins,username,'.$id,
            // 'phone' => 'required|numeric|digits:11|unique:admins,phone,'.$id,
             'email' => 'required|email|unique:admins,email,'.$id,
             'name' => 'required|min:3',   
             'status' => 'required',   
         
         ]);
+    }
+    else{
+       
+        $this->validate($request,[
+            'password' => 'required|min:6|max:30',
+            'email' => 'required|email|unique:admins,email,'.$id,
+            'name' => 'required|min:3',   
+            'status' => 'required',   
+        
+        ]);
+        $pass=Hash::make($request->password);
+    }
         try {
             DB::beginTransaction();
    
-        $list =  Admin::find($id);
+  
        $list->name = $request->name;
-       $list->username = CommonFx::make_slug($request->username);
-        $list->email = $request->email;
+             $list->email = $request->email;
         $list->status = $request->status;
         $list->phone = $request->phone;
+        $list->password =$pass;
       
         $list->update();
-        if($list->save()){
-            DB::table('model_has_roles')->where('model_id',$id)->delete();
-            $list->assignRole($request->input('roles'));
-
-        }
+       
           $data= array(
             
             'message' =>'<a class="black-text"  href="'. url('/admin/profile') . '">Superadmin Update Your Info</a>',
@@ -206,8 +213,8 @@ class AdminController extends Controller
         $deleteadmin=Admin::destroy($id);
      
          $maildata = [  
-            'name'=> $deleteadmin->name,
-            'message' => 'Homeobari Superadmin Delete Your Account. If You want Recover Your email please Contact 01739898764',
+            'name'=>'hi',
+            'message' => 'Homeobari Superadmin Delete Your Account. If You want Recover Your email please Contact ',
              'subject'=> 'Account Delete',
              
            

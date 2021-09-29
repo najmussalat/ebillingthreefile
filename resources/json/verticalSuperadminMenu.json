@@ -16,12 +16,7 @@
                     "i18n": "Permission  List",
                     "slug": "superadmin-permissionlist"
                 },
-                {
-                    "url": "superadmin/accountrolelist",
-                    "name": "Role List",
-                    "i18n": "Role List",
-                    "slug": "superadmin-accountrolelist"
-                },
+              
                 {
                     "url": "superadmin/adminlist",
                     "name": "Admin List",
@@ -105,6 +100,28 @@
         },
         
         {
+            "url": "javascript:void(0)",
+            "name": "Customer",
+            "i18n": "Customer",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "customer",
+            "icon": "pages",
+            "submenu": [
+                {
+                    "url": "superadmin/customerlist",
+                    "name": "Customer List",
+                    "i18n": "Customer List",
+                    "slug": "superadmin/customerlist"
+                },
+                {
+                    "url": "superadmin/importcustomer",
+                    "name": "Import Customer",
+                    "i18n": "Import Customer",
+                    "slug": "superadmin/importcustomer"
+                }
+
+            ]
+        },  {
             "url": "javascript:void(0)",
             "name": "Contact",
             "i18n": "Contact",

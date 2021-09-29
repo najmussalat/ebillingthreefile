@@ -54,7 +54,7 @@ class AreaController extends Controller
            $div->save();
      
       if($div->save()){
-      Toastr::success("Area Create Successfully", "Well Done");
+      Toastr::success("Area Created Successfully", "Well Done");
                 return Redirect::to('admin/arealist'); 
       }
       else{
@@ -92,7 +92,7 @@ class AreaController extends Controller
               $div->save();
         
          if($div->save()){
-         Toastr::success("Area Update Successfully", "Well Done");
+         Toastr::success("Area Updated Successfully", "Well Done");
                    return Redirect::to('admin/arealist'); 
          }
          else{
@@ -108,7 +108,7 @@ class AreaController extends Controller
          
              $divisioninfo=Area::whereadmin_id(Auth::id())->findOrFail($id)->delete();
             if($divisioninfo){
-              Toastr::success("Area Delete Successfully", "Well Done");
+              Toastr::success("Area Deleted Successfully", "Well Done");
                    return Redirect::to('admin/arealist'); 
             }
             else{
@@ -127,7 +127,7 @@ foreach ($searchvalue as $key => $searchval) {
 $output.='<tr>'.
 '<td>'.$searchval->id.'</td>'.
 '<td>'.$searchval->areaname.'</td>'.
-'<td>'.'<a target="_blank" href="'.url('admin/editcountry/'.$searchval->id).'" class="btn-floating mb-1 waves-effect waves-light"> <i class="material-icons">edit</i></a>'.'</td>'.
+'<td>'.'<a target="_blank" href="'.url('admin/editarea/'.$searchval->id).'" class="btn-floating mb-1 waves-effect waves-light"> <i class="material-icons">edit</i></a>'.'</td>'.
 '</tr>';
 }
 return Response($output);

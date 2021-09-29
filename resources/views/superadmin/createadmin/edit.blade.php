@@ -18,13 +18,11 @@
                                               
                                           </div>
                                           <div class="input-field col m12 s12">
-                                            {!!Form::text('username',null, array('id'=>'username','required'))!!}
-                                            {!!Form::label('username',' * User Name ')!!}
+                                            {!!Form::password('password',null, array('id'=>'password','required'))!!}
+                                            {!!Form::label('username',' password')!!}
                                             
                                         </div>
-                                        <div class="input-field col m12 s12">
-                                            {!!FORM::select('status', ['1' => 'Active', '2' => 'Inactive'], null, array('required','id'=>'status', 'class'=>'select2 browser-default'))!!}    
-                                          </div>
+                                      
                                           <div class="input-field col m12 s12">
                                               {!!Form::email('email',null, array('id'=>'email','required'))!!}
                                               {!!Form::label('email',' Email')!!}
@@ -35,11 +33,10 @@
                                             {!!Form::label('phone',' Phone *')!!}
                                             
                                         </div>
-                                          <div class="input-field col m12 s12">
-                                            {!!FORM::select('roles[]', $roles, $userRole, array('required','id'=>'roles', 'class'=>'select2 browser-default','multiple'=>true))!!}    
+                                         
+                                        <div class="input-field col m12 s12">
+                                            {!!FORM::select('status', ['1' => 'Active', '2' => 'Inactive'], null, array('required','id'=>'status', 'class'=>'select2 browser-default'))!!}    
                                           </div>
-                                        
-                                       
                                       </div>
                                       
                                                 <div class="row">

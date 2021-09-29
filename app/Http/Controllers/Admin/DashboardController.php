@@ -5,14 +5,18 @@ use notifications;
 use App\Models\User;
 use App\Models\Admin;
 use App\Models\Contact;
-use Illuminate\Http\Request;
-use App\Models\Medicineinformation;
-use App\Http\Controllers\Controller;
+use App\Models\Smssent;
 use App\Models\Complain;
 use App\Models\Customer;
-use App\Models\Smssent;
+use Illuminate\Http\Request;
+use App\Exports\Customerexcelform;
+use Kamaln7\Toastr\Facades\Toastr;
+use App\Models\Medicineinformation;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
@@ -62,4 +66,20 @@ class DashboardController extends Controller
         
         
     }
+
+
+    public function customerexcel(){
+        
+        $pageConfigs = ['navbarLarge' => false];
+        
+        return view('admin.excel.customerimporter',['pageConfigs' => $pageConfigs]); 
+    }
+
+    public function makecusomerexcelform(Request $request){
+    
+         return  Excel::download(new Customerexcelform($request),'customer.xlsx');
+
+                       return Redirect::to('admin/customerexcelform'); 
+            }
+
 }

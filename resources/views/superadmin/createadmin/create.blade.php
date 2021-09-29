@@ -9,7 +9,7 @@
                                
                                 <div id="Form-advance" class="card card card-default scrollspy">
                                     <div class="card-content">
-                                        <h4 class="card-title">Medicine Form</h4>
+                                      
                                      
                                         {!! Form::open(array('url' => 'superadmin/createadmin','method'=>'POST','files'=>true )) !!}
                                     

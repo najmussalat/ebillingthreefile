@@ -265,7 +265,7 @@ if($info){
 if($pa){
 $q=Customer::find($pa->customer_id);
 $q->total=$q->total+$request->payamount;
-//$q->due=$q->due+$request->payamount;
+$q->due=$q->due-$request->payamount;
 $q->save();
 }
 $info->delete();

@@ -35,7 +35,7 @@ class OnchangeController extends Controller
     
         }
         public function area($id){
-            return response()->json( Area::whereadmin_id(Auth::id())->wherethana_id($id)->select('id','areaname')->get()->toArray());
+            return response()->json(Area::whereadmin_id(Auth::guard('admin')->user()->id)->wherethana_id($id)->select('id','areaname')->get()->toArray());
         
             
                 } 

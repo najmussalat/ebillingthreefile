@@ -198,9 +198,9 @@
                         $('#name').append('<span>' + data.result.customername + '</span>');
                         $('#ppusername').append('<span>' + data.result.secretname +
                             '</span>');
-                        $('#adress').append('<span> House No # '+ data.result.houseno + ','+ data.result.floor + ','  + data.result.district.district + ',' +
-                            data.result.thana.thana + ',' + data.result.area.areaname +
-                            ',' + data.result.customermobile + '</span>');
+                        $('#adress').append('<span> House No # '+ data.result.houseno + ', '+ data.result.floor + ', '  + data.result.district.district + ', ' +
+                            data.result.thana.thana + ', ' + data.result.area.areaname +
+                            ', ' + data.result.customermobile + '</span>');
                         $('#monthlyrent').append('<span>' + data.result.bill[0]
                             .monthlyrent + '</span>');
                         $('#due').append('<span>' + data.result.bill[0].due + '</span>');

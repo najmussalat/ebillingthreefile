@@ -26,6 +26,12 @@
                     "slug": "admin/createcustomer"
                 },
                 {
+                    "url": "admin/customerexcelform",
+                    "name": "Customer Excel Form",
+                    "i18n": "Customer Excel Form",
+                    "slug": "admin/customerexcelform"
+                },
+                {
                     "url": "admin/inactivecustomer",
                     "name": "Inactive Customer",
                     "i18n": "Inactive Customser",
@@ -79,8 +85,8 @@
                 },
                 {
                     "url": "admin/printlocationwise",
-                    "name": "Print Locationwise",
-                    "i18n": "Print Locationwise",
+                    "name": "By Location",
+                    "i18n": "By Location",
                     "slug": "admin/printlocationwise"
                 }
 

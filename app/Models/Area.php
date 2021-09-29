@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Area extends Model
 {
     protected $fillable=[
-        'thana_id','areaname'
+        'thana_id','areaname','admin_id'
     ];
     
     public function thana()

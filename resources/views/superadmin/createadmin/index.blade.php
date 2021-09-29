@@ -35,7 +35,6 @@
                                                           <th>Image</th>
                                                           <th>Phone</th>
                                                           <th>Email</th>
-                                                          <th>Role</th>
                                                           <th>Status</th>
                                                           <th>Action</th>
                                                           <th>Delete</th>
@@ -53,16 +52,7 @@
                                                          
                                                              <td>{{@$admin->phone}}</td>
                                                               <td>{{@$admin->email}}</td>
-                                                               <td>@if(!empty($admin->getRoleNames()))
-
-                                                            @foreach($admin->getRoleNames() as $v)
-                                                    
-                                                               <label class="badge badge-primary">{{ $v }}</label>
-                                                    
-                                                            @endforeach
-                                                    
-                                                          @endif</td>
-                                                     <td>@if($admin->status==1)
+                                                             <td>@if($admin->status==1)
                                                             <button type="button"  class="btn-floating mb-1 waves-effect waves-light approved"  rid="{{$admin->id}}"><i class="material-icons">beenhere</i>   </button>@else
                                                             <button type="button" class="btn-floating mb-1 waves-effect waves-light notapproved"  rid="{{$admin->id}}"><i class="material-icons">block</i> </button>
                                                          @endif</td>

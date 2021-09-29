@@ -84,8 +84,9 @@ class CustomerController extends Controller
     return (($data->bill[0]->total));
 })
       ->addColumn('address' ,function($data){
-        return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
+        return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
     })
+   
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])
         
@@ -98,9 +99,9 @@ class CustomerController extends Controller
   public function pendingcustomer(Request $request)
   {
     if (request()->ajax()) {
-      return datatables()->of(Customer::with('district','thana','area','bill.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2))
+      return datatables()->of(Customer::with('district','thana','area','bills.collection')->whereadmin_id(Auth::guard('admin')->user()->id)->wherestatus(2))
         ->addColumn('action', function ($data) {
-          $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bill[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
+          $button ='<button type="button" id="UpdateBillBtn" uid="' . $data->bills[0]->id . '" class="invoice-action-view btn-sm" title="Update Bill"><i class="material-icons ">update</i></button>'; 
           $button .= '&nbsp;&nbsp;';
           $button .= '<a title="Edit Customer" href="/admin/editcustomer/' . $data->id . '" class="invoice-action-view" title="Edit Customer"><i class="material-icons">edit</i></a>';
           $button .= '&nbsp;&nbsp;';
@@ -121,34 +122,34 @@ class CustomerController extends Controller
         return $button;
     }})
         ->addColumn('monthlyrent' ,function($data){
-          return $data->bill[0]->monthlyrent;
+          return $data->bills[0]->monthlyrent;
       })  
       ->addColumn('due' ,function($data){
-        return $data->bill[0]->due;
+        return $data->bills[0]->due;
     }) 
       ->addColumn('discount' ,function($data){
-        return $data->bill[0]->discount;
+        return $data->bills[0]->discount;
     }) 
         ->addColumn('advance' ,function($data){
-        return $data->bill[0]->advance;
+        return $data->bills[0]->advance;
     }) 
     ->addColumn('addicrg' ,function($data){
-        return $data->bill[0]->addicrg;
+        return $data->bills[0]->addicrg;
     })
      ->addColumn('vat' ,function($data){
-        return $data->bill[0]->vat;
+        return $data->bills[0]->vat;
     }) 
       ->addColumn('billamount' ,function($data){
-        return $data->bill[0]->total;
+        return $data->bills[0]->total;
     })
     ->addColumn('collection' ,function($data){
-      return $data->bill[0]->collection->sum('paid');
+      return $data->bills[0]->collection->sum('paid');
   })
   ->addColumn('duetotal' ,function($data){
-    return ($data->bill[0]->total);
+    return ($data->bills[0]->total);
 })
       ->addColumn('address' ,function($data){
-        return 'House No- '. $data->houseno.'<br/>'. $data->district->district.'<br/>'.$data->thana->thana.'<br/>'.$data->area->areaname;
+        return 'House No- '. @$data->houseno.'<br/>'. @$data->district->district.'<br/>'.@$data->thana->thana.'<br/>'.@$data->area->areaname;
     })
         ->addIndexColumn()
         ->rawColumns(['action','duetotal','status','address'])
@@ -182,18 +183,18 @@ class CustomerController extends Controller
   {
     if($request->to==!null && $request->from==null){
    
-      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereDate('created_at', '=', $request->to)->onlyTrashed()->get();
+      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereDate('created_at', '=', $request->to)->wherestatus(3)->get();
     }
     elseif($request->to==null && $request->from==!null){
-      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereDate('updated_at', '=', $request->from)->onlyTrashed()->get();
+      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereDate('updated_at', '=', $request->from)->wherestatus(3)->get();
     }
      elseif($request->to==!null && $request->from==!null){
-      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereBetween('created_at', array($request->to, $request->from))->onlyTrashed()->get();
+      $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->whereBetween('created_at', array($request->to, $request->from))->wherestatus(3)->get();
     }
     
  else{
 
-  $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->onlyTrashed()->get();
+  $info=Customer::whereadmin_id(Auth::id())->wherecountry_id($request->country_id)->wherestatus(3)->get();
  }
 
     $pageConfigs = ['pageHeader' => false, 'isFabButton' => false];
@@ -363,6 +364,7 @@ class CustomerController extends Controller
 
   public function edit($id)
   {
+    //dd($id);
     $breadcrumbs = [
       ['link' => "admin/dashboard", 'name' => "Home"], ['link' => "admin/customerlist", 'name' => "Customer"], ['name' => "edit"],
     ];
@@ -552,8 +554,10 @@ class CustomerController extends Controller
 
   public function destroy($id)
   {
-
-    return response(Customer::whereadmin_id(Auth::id())->findOrFail($id)->delete()) ; 
+   $info= Customer::whereadmin_id(Auth::id())->find($id);
+$info->status=3;
+$info->save();
+    return response($info) ; 
    
   } 
    public function findbill($id)

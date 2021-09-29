@@ -289,15 +289,30 @@ public static function Divisionname(){
     public static function Totalcustomerinfo(){
         return DB::table('customers')
         ->join('bills', 'customers.id', '=', 'bills.customer_id')
-       // ->join('collections', 'bills.id', '=', 'collections.bill_id')
+        // ->join('collections', 'bills.id', '=', 'collections.bill_id')
          ->where('customers.admin_id','=',Auth::id())
          ->whereMonth('bills.created_at', date('m'))
 ->whereYear('bills.created_at', date('Y'))
-        ->select('customers.id','bills.monthlyrent')
+        ->select('customers.id','bills.monthlyrent','bills.due','bills.discount','bills.advance','bills.addicrg','bills.vat','bills.paid','bills.total')
         ->get();
-        // return Customer::with('bill.collection')->wherestatus(1)->whereadmin_id(Auth::id())->select('id','admin_id','status','bills')->get()->sum('monthlyrent');
+       
         
-        }   public static function Districtname(){
+        }
+
+        public static function Totalcustomercollection(){
+            return DB::table('customers')
+            ->join('bills', 'customers.id', '=', 'bills.customer_id')
+             ->join('collections', 'bills.id', '=', 'collections.bill_id')
+             ->where('customers.admin_id','=',Auth::id())
+             ->whereMonth('bills.created_at', date('m'))
+    ->whereYear('bills.created_at', date('Y'))
+            ->select('customers.id','collections.paid')
+            ->get();
+           
+            
+            }
+        
+        public static function Districtname(){
         return District::pluck('district','id');
         
         }
@@ -415,7 +430,7 @@ public static function Divisionname(){
         public static function sentsmsbillcreate($smsinfo){
             $smssetting=Smssent::whereadmin_id($smsinfo['adminid'])->firstOrFail();
             if(($smssetting->billing==1) && ($smssetting->blance>1)){
-         $companyinfo=Admin::find($smsinfo['adminid'])->select('id','company');
+         $companyinfo=Admin::find($smsinfo['adminid']);
             $text= str_replace(['#CUSTOMER_NAME#','#MONTH#','#BILL_AMOUNT#', '#CUSTOMER_ID#','#LAST_DAY_OF_PAY_BILL#','#COMPANY_NAME#'], [$smsinfo['name'],date('M-Y'),$smsinfo['billamount'], $smsinfo['id'],$smsinfo['expeirydate'], $companyinfo->company], $smssetting->billingmessage);
           
                 // $number=$smsinfo->phone;

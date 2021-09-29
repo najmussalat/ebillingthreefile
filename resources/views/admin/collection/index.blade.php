@@ -149,9 +149,9 @@ $(document).ready(function () {
            $('#userid').append('<span>' + data.result.loginid + '</span>');
             $('#name').append('<span>' + data.result.customername + '</span>');
             $('#ppusername').append('<span>' + data.result.secretname + '</span>');
-            $('#adress').append('<span> House No # '+ data.result.houseno + ','+ data.result.floor + ','  + data.result.district.district + ',' +
-                            data.result.thana.thana + ',' + data.result.area.areaname +
-                            ',' + data.result.customermobile + '</span>');
+            $('#adress').append('<span> House No # '+ data.result.houseno + ', '+ data.result.floor + ', '  + data.result.district.district + ', ' +
+                            data.result.thana.thana + ', ' + data.result.area.areaname +
+                            ', ' + data.result.customermobile + '</span>');
           $.each(data.result.bill, function(key, value){
                        // alert(key);
                         $('#dd').append('<td>' + value.created_at + '</td><td>' + value.monthlyrent + '</td><td>' + value.addicrg + '</td><td>' + value.discount + '</td><td>' + value.advance + '</td><td>' + value.vat + '</td><td>' + value.due + '</td><td></td><td></td><td>' +((value.total).toFixed(2)) + '</td>'

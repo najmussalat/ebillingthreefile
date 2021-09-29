@@ -1,0 +1,102 @@
+{
+    "menu": [{
+            "url": "javascript:void(0)",
+            "name": "Customer",
+            "i18n": "Customer",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "customer",
+            "icon": "dashboard",
+
+            "submenu": [{
+                    "url": "customer/customerlist",
+                    "name": "Customer List",
+                    "i18n": "Customer List",
+                    "slug": "customer/customerlist"
+                },
+                {
+                    "url": "customer/pendingcustomerlist",
+                    "name": "Pending Customer List",
+                    "i18n": "Pending Customer List",
+                    "slug": "customer/pendingcustomerlist"
+                },
+                {
+                    "url": "customer/createcustomer",
+                    "name": "Create Customer",
+                    "i18n": "Create Customser",
+                    "slug": "customer/createcustomer"
+                },
+                {
+                    "url": "customer/inactivecustomer",
+                    "name": "Inactive Customer",
+                    "i18n": "Inactive Customser",
+                    "slug": "customer/inactivecustomer"
+                }
+            ]
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Collection",
+            "i18n": "Collection",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "collection",
+            "icon": "filter_vintage",
+
+            "submenu": [{
+                    "url": "customer/complain",
+                    "name": "Collection Search",
+                    "i18n": "Collection Search",
+                    "slug": "customer-collection"
+                },
+                {
+                    "url": "customer/createcollection",
+                    "name": "Create Collection",
+                    "i18n": "Create Collection",
+                    "slug": "createcollection"
+                },
+                {
+                    "url": "customer/cancelcollection",
+                    "name": "Cancel Collection",
+                    "i18n": "Cancel Collection",
+                    "slug": "cancelcollection"
+                }
+
+
+            ]
+
+        },
+        {
+            "url": "javascript:void(0)",
+            "name": "Complain",
+            "i18n": "Complain",
+            "class": "collapsible-header waves-effect waves-cyan",
+            "slug": "complain",
+            "icon": "compare_arrows",
+            "submenu": [{
+                    "url": "customer/complainlist",
+                    "name": "Complain List",
+                    "i18n": "Complain List",
+                    "slug": "customer/complainlist"
+                },
+                {
+                    "url": "customer/createcomplain",
+                    "name": "Create Complain",
+                    "i18n": "Create Complain",
+                    "slug": "customer/createcomplain"
+                },
+                {
+                    "url": "customer/complainsetting",
+                    "name": "Complain Setting",
+                    "i18n": "Complain Setting",
+                    "slug": "customer/complainsetting"
+                }
+                
+                
+
+            ]
+        }
+       
+
+
+
+    ]
+}
